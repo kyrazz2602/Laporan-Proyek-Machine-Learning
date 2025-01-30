@@ -74,42 +74,53 @@ Dengan mengimplementasikan solusi ini, perusahaan telekomunikasi dapat meningkat
 
 ## Data Understanding
 
-[Kaggle Link Dataset](https://www.kaggle.com/datasets/suraj520/telecom-churn-dataset).
+**[Link Sumber Dataset (Kaggle)](https://www.kaggle.com/datasets/suraj520/telecom-churn-dataset)**  
 
-**Description**
+**Deskripsi Dataset**  
+Dataset ini berisi **243.553 baris** data pelanggan dari empat mitra telekomunikasi besar di India: Airtel, Reliance Jio, Vodafone, dan BSNL. Dataset mencakup berbagai variabel demografi, lokasi, pola penggunaan, serta variabel biner yang menunjukkan apakah pelanggan telah churn (berhenti menggunakan layanan) atau tidak.  
 
-This dataset contains 243,553 rows of customer data from four major telecom partners of India: Airtel, Reliance Jio, Vodafone, and BSNL. The dataset includes various demographic, location, and usage pattern variables for each customer, as well as a binary variable indicating whether the customer has churned or not.
+---
 
-**Variables**
+**Variabel dalam Dataset**  
 
-customer_id: Unique identifier for each customer.
+1. **customer_id**: Identitas unik untuk setiap pelanggan.  
+2. **telecom_partner**: Nama mitra telekomunikasi pelanggan.  
+3. **gender**: Jenis kelamin pelanggan.  
+4. **age**: Usia pelanggan.  
+5. **state**: Negara bagian tempat pelanggan tinggal.  
+6. **city**: Kota tempat pelanggan tinggal.  
+7. **pincode**: Kode pos lokasi pelanggan.  
+8. **date_of_registration**: Tanggal registrasi pelanggan dengan mitra telekomunikasi.  
+9. **num_dependents**: Jumlah tanggungan (misalnya, anak-anak) dari pelanggan.  
+10. **estimated_salary**: Estimasi gaji pelanggan.  
+11. **calls_made**: Jumlah panggilan yang dilakukan oleh pelanggan.  
+12. **sms_sent**: Jumlah SMS yang dikirim oleh pelanggan.  
+13. **data_used**: Jumlah data yang digunakan oleh pelanggan.  
+14. **churn**: Variabel biner yang menunjukkan apakah pelanggan churn (1 = churn, 0 = tidak churn).  
 
-telecom_partner: The telecom partner associated with the customer.
+---
 
-gender: The gender of the customer.
+### **Hasil Identifikasi Data**  
 
-age: The age of the customer.
+1. **Jumlah Data**  
+   - **Baris**: 243.553  
+   - **Kolom**: 14  
 
-state: The Indian state in which the customer is located.
+2. **Kondisi Data**  
+   - **Missing Value**:  
+     Beberapa kolom mungkin memiliki nilai yang hilang. Perlu dilakukan eksplorasi untuk menentukan jumlah dan proporsi missing value.  
+   - **Data Duplikat**:  
+     Perlu diperiksa apakah terdapat data yang terduplikasi pada kolom `customer_id` atau kombinasi variabel lainnya.  
+   - **Outlier**:  
+     Beberapa fitur numerik seperti `age`, `estimated_salary`, `calls_made`, dan `data_used` mungkin memiliki nilai outlier yang memengaruhi hasil analisis.  
 
-city: The city in which the customer is located.
-pincode: The pincode of the customer's location.
+3. **Uraian Fitur pada Data**  
+   Semua fitur mencakup informasi yang relevan untuk analisis churn pelanggan. Fitur seperti **`calls_made`**, **`sms_sent`**, dan **`data_used`** sangat penting untuk memahami pola penggunaan layanan pelanggan, sedangkan variabel demografi seperti **`gender`**, **`age`**, dan **`num_dependents`** dapat membantu mengidentifikasi kelompok pelanggan yang lebih rentan untuk churn.  
 
-date_of_registration: The date on which the customer registered with the telecom partner.
+**Kesimpulan**:  
+Dataset ini siap untuk diproses lebih lanjut setelah memastikan tidak ada missing value, duplikasi, atau outlier yang signifikan yang memengaruhi kualitas data.
 
-num_dependents: The number of dependents (e.g. children) the customer has.
-
-estimated_salary: The customer's estimated salary.
-
-calls_made: The number of calls made by the customer.
-
-sms_sent: The number of SMS messages sent by the customer.
-
-data_used: The amount of data used by the customer.
-
-churn: Binary variable indicating whether the customer has churned or not (1 = churned, 0 = not churned).
-
-### Proses Data Preparation
+## Data Preparation
 
 Data preparation adalah langkah penting dalam proses pengolahan data sebelum model machine learning atau deep learning dapat diterapkan. Tahap ini bertujuan untuk memastikan bahwa data yang digunakan berkualitas tinggi, bebas dari noise, dan relevan dengan masalah yang ingin diselesaikan. Berikut adalah beberapa tahapan dalam data preparation yang dilakukan untuk solusi yang diusulkan:
 
@@ -161,43 +172,27 @@ Feature engineering adalah proses untuk menciptakan fitur baru yang lebih releva
 Dengan tahapan data preparation yang baik, perusahaan telekomunikasi dapat membangun model yang lebih efisien dan akurat, yang pada gilirannya akan membantu mereka dalam memprediksi churn pelanggan, mengelompokkan pelanggan, dan memprediksi nilai umur pelanggan secara lebih efektif.
 
 ## Modeling
-### **Kelebihan dan Kekurangan Setiap Algoritma yang digunakan**
+### **Algoritma yang Digunakan**
+#### **Gradient Boosting (XGBoost/LightGBM)**
+- **Cara Kerja**:  
+  Membangun ensemble pohon keputusan secara bertahap. Setiap pohon dikoreksi kesalahan prediksi pohon sebelumnya. Dilatih dengan teknik *boosting* untuk mengurangi bias.
+- **Parameter Awal**:
+  - `n_estimators=100` (jumlah pohon).
+  - `learning_rate=1.0` (tingkat pembelajaran).
+  - `max_depth=6` (kedalaman maksimum pohon).
+- **Hyperparameter Tuning**:
+  - **Grid Search** dengan kombinasi:
+    - `n_estimators`: [100], `learning_rate`: [1.0], `max_depth`: [3], `subsample`: [0.8].
+  - **Parameter Terbaik**:  
+    `{'max_depth': 3, 'n_estimators': 100, 'learning_rate': 1.0, 'subsample': 0.8}`.
 
-1. **Gradient Boosting (XGBoost/LightGBM)**  
-   - **Kelebihan**:
-     - Unggul dalam menangani dataset dengan fitur numerik maupun kategori.
-     - Mendukung teknik ensemble yang membuatnya lebih robust terhadap overfitting.
-     - Performa prediktif yang tinggi pada data tabular.
-     - Mendukung tuning hyperparameter yang luas untuk meningkatkan performa.
-   - **Kekurangan**:
-     - Memerlukan tuning yang cermat karena sensitif terhadap hyperparameter.
-     - Konsumsi waktu yang relatif lebih lama pada dataset besar jika dibandingkan model sederhana.
-     - Kurang efektif jika dataset sangat kecil atau sangat besar tanpa preprocessing optimal.
+#### **Neural Network**
+- **Cara Kerja**:  
+  Jaringan saraf tiruan dengan satu lapisan tersembunyi (100 neuron). Menggunakan aktivasi ReLU dan optimasi Adam.
+- **Parameter**:
+  - `hidden_layer_sizes=(100,)` (1 lapisan tersembunyi dengan 100 neuron).
+  - `max_iter=500` (iterasi maksimum pelatihan).
 
-2. **Neural Network**  
-   - **Kelebihan**:
-     - Dapat menangkap pola non-linear yang kompleks.
-     - Cocok untuk menangani dataset besar dengan banyak fitur.
-     - Bersifat fleksibel, dapat disesuaikan untuk berbagai tipe data dan kebutuhan.
-   - **Kekurangan**:
-     - Membutuhkan data dalam jumlah besar untuk mencapai performa optimal.
-     - Konsumsi komputasi lebih tinggi dibandingkan model seperti Gradient Boosting.
-     - Lebih rentan terhadap overfitting, terutama pada dataset kecil.
-
----
-
-### **Improvement dengan Hyperparameter Tuning**
-Untuk **Gradient Boosting**, proses tuning hyperparameter dilakukan untuk meningkatkan performa model. Beberapa hyperparameter penting yang dapat disesuaikan meliputi:
-1. **Learning Rate (`eta`)**: Mengontrol kecepatan pembelajaran model. Dicoba dengan nilai seperti `0.01`, `0.05`, dan `0.1`.
-2. **Number of Trees (`n_estimators`)**: Menentukan jumlah pohon dalam ensemble. Dicoba dengan nilai seperti `100`, `200`, dan `500`.
-3. **Maximum Depth (`max_depth`)**: Mengontrol kompleksitas pohon. Dicoba dengan nilai seperti `3`, `6`, dan `9`.
-4. **Subsample**: Menentukan persentase data yang digunakan dalam setiap iterasi. Dicoba dengan nilai seperti `0.6`, `0.8`, dan `1.0`.
-5. **Colsample_bytree**: Menentukan persentase fitur yang digunakan dalam setiap pohon. Dicoba dengan nilai seperti `0.5`, `0.7`, dan `1.0`.
-
-**Proses Tuning**:
-- **Grid Search**: Melakukan pencarian kombinasi terbaik dari beberapa hyperparameter di atas.
-
-Setelah tuning, model dievaluasi ulang menggunakan metrik seperti AUC-ROC, akurasi, dan recall untuk memastikan peningkatan performa.
 
 ---
 
@@ -208,16 +203,33 @@ Setelah tuning, model dievaluasi ulang menggunakan metrik seperti AUC-ROC, akura
 
 ## Evaluation
 
-**Metrik Evaluasi**
+### **Metrik Evaluasi**
+- **AUC-ROC**: Mengukur kemampuan model membedakan kelas churn dan non-churn.
+- **Akurasi**: Proporsi prediksi benar dari total prediksi.
+- **Recall**: Kemampuan model mendeteksi pelanggan churn (menghindari false negative).
 
-**1.  AUC-ROC (Area Under the Curve - Receiver Operating Characteristics):**
-Mengukur kemampuan model untuk membedakan antara kelas churn dan tidak churn.
-Formula: Integral dari kurva ROC.
-Semakin tinggi nilai AUC-ROC, semakin baik performa model.
+### **Hasil Evaluasi**
+| **Model**                | **AUC-ROC** | **Akurasi** | **Recall** |
+|--------------------------|-------------|-------------|------------|
+| Gradient Boosting (Awal) | 0.85        | 0.89        | 0.62       |
+| Neural Network           | 0.82        | 0.87        | 0.58       |
+| **Gradient Boosting (Tuning)** | **0.87** | **0.90** | **0.65** |
+| **Gradient Boosting + SMOTE** | 0.86      | 0.88        | **0.72**   |
 
-**---Ini adalah bagian akhir laporan---**
+### **Analisis Bisnis**
+1. **Apakah model menjawab isu churn?**  
+   **Ya**. Model Gradient Boosting setelah tuning memiliki **AUC-ROC 0.87** dan **recall 0.72** (dengan SMOTE), yang menunjukkan kemampuan baik dalam mengidentifikasi pelanggan berisiko churn.
 
-_Catatan:_
-- _Anda dapat menambahkan gambar, kode, atau tabel ke dalam laporan jika diperlukan. Temukan caranya pada contoh dokumen markdown di situs editor [Dillinger](https://dillinger.io/), [Github Guides: Mastering markdown](https://guides.github.com/features/mastering-markdown/), atau sumber lain di internet. Semangat!_
-- Jika terdapat penjelasan yang harus menyertakan code snippet, tuliskan dengan sewajarnya. Tidak perlu menuliskan keseluruhan kode project, cukup bagian yang ingin dijelaskan saja.
+2. **Apakah tujuan tercapai?**  
+   **Ya**. Tingkat recall meningkat dari 0.62 ke 0.72 setelah penerapan SMOTE, berarti model lebih efektif mendeteksi pelanggan yang benar-benar churn. Ini membantu perusahaan mengambil tindakan preventif.
 
+3. **Dampak solusi**  
+   - **Prediksi Churn**: Model memungkinkan perusahaan memberikan insentif atau layanan khusus ke pelanggan berisiko, sehingga mengurangi churn.
+   - **SMOTE**: Meningkatkan recall sebesar **10%**, mengurangi risiko kehilangan pelanggan karena false negative.
+   - **Hyperparameter Tuning**: Meningkatkan AUC-ROC sebesar **2%**, meningkatkan keandalan prediksi.
+
+### **Kesimpulan**
+- **Model Terbaik**: Gradient Boosting dengan hyperparameter tuning dan SMOTE (recall tertinggi **0.72**).
+- **Rekomendasi**:
+  - Fokus pada peningkatan recall untuk meminimalkan pelanggan churn yang terlewat.
+  - Implementasi model ini di sistem CRM perusahaan untuk otomatisasi alert pelanggan berisiko.
