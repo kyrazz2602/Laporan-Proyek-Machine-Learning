@@ -124,52 +124,36 @@ Dataset ini siap untuk diproses lebih lanjut setelah memastikan tidak ada missin
 
 Data preparation adalah langkah penting dalam proses pengolahan data sebelum model machine learning atau deep learning dapat diterapkan. Tahap ini bertujuan untuk memastikan bahwa data yang digunakan berkualitas tinggi, bebas dari noise, dan relevan dengan masalah yang ingin diselesaikan. Berikut adalah beberapa tahapan dalam data preparation yang dilakukan untuk solusi yang diusulkan:
 
-#### 1. **Pengumpulan Data**
-Langkah pertama adalah mengumpulkan data yang diperlukan untuk masing-masing masalah yang dihadapi. Misalnya, untuk prediksi churn pelanggan, kita memerlukan data historis mengenai penggunaan layanan pelanggan, durasi langganan, tingkat interaksi pelanggan, dan informasi lainnya yang relevan. Dataset yang digunakan dalam contoh ini adalah *Telecom Churn Dataset* dari Kaggle.
+1. **Load Dataset**  
+   - Menggunakan `pd.read_csv()` untuk membaca dataset bernama `telecom_churn.csv`.
 
-#### 2. **Pembersihan Data (Data Cleaning)**
-Pembersihan data sangat penting untuk menghilangkan ketidakkonsistenan dan data yang hilang. Beberapa langkah dalam pembersihan data antara lain:
-   - **Menghapus atau mengisi data yang hilang (missing values)**: Data yang tidak lengkap dapat mempengaruhi kualitas model. Data yang hilang bisa diatasi dengan menghapus entri yang tidak lengkap atau mengisinya dengan nilai rata-rata, median, atau menggunakan metode imputasi yang lebih kompleks.
-   - **Menghapus duplikat**: Data yang duplikat dapat mengarah pada overfitting dan bias dalam model. Oleh karena itu, entri yang sama harus dihapus.
-   - **Menangani data outlier**: Outlier dapat mempengaruhi model dan menyebabkan hasil yang tidak akurat. Dalam kasus ini, teknik seperti clipping atau transformasi data dapat digunakan untuk menangani outlier.
+2. **Exploratory Data Analysis (EDA) Awal**  
+   - `df.head()` untuk melihat beberapa baris pertama dataset.  
+   - `df.info()` untuk melihat tipe data dan informasi umum dataset.  
+   - `df.describe()` untuk melihat statistik deskriptif.  
+   - `df.isnull().sum()` untuk mengecek jumlah missing values.  
+   - `df.duplicated().sum()` untuk mengecek jumlah duplikasi.
 
-#### 3. **Penyandian Kategorikal (Encoding Categorical Data)**
-Banyak algoritma machine learning memerlukan data numerik, sehingga variabel kategorikal seperti jenis layanan atau status langganan perlu diubah menjadi format numerik.
-   - **One-Hot Encoding**: Digunakan untuk variabel kategorikal yang memiliki beberapa kategori tanpa urutan tertentu (misalnya, jenis layanan).
+3. **Handling Duplicate Data**  
+   - `df.drop_duplicates(inplace=True)` digunakan untuk menghapus data yang duplikat.
 
-#### 4. **Penskalaan Data (Feature Scaling)**
-Penskalaan data penting agar fitur dengan skala besar (seperti pengeluaran bulanan) tidak mendominasi model. Teknik penskalaan yang umum digunakan adalah:
-   - **StandardScaler**: Mengubah fitur agar memiliki distribusi normal dengan mean = 0 dan deviasi standar = 1.
+4. **Feature Selection**  
+   - Menghapus kolom yang tidak diperlukan (`customer_id`) dengan `df.drop("customer_id", axis=1)`, yang kemungkinan merupakan identifikasi unik pelanggan.
 
-#### 5. **Pemisahan Data (Data Splitting)**
-Data harus dibagi menjadi dua set utama:
-   - **Training Set**: Digunakan untuk melatih model.
-   - **Test Set**: Digunakan untuk mengevaluasi performa model setelah pelatihan.
-   Biasanya, pembagian data dilakukan dengan rasio 80:20 atau 70:30.
+5. **Handling Missing Values**  
+   - Iterasi melalui semua kolom dataset dan mengisi nilai yang hilang:
+     - Jika tipe data numerik: Digantikan dengan median atau mean.  
+     - Jika tipe data kategorikal: Digantikan dengan modus.
 
-#### 6. **Penyusunan Fitur (Feature Engineering)**
-Feature engineering adalah proses untuk menciptakan fitur baru yang lebih relevan dengan masalah yang ingin diselesaikan. Beberapa contoh adalah:
-   - **Membuat fitur waktu**: Seperti durasi langganan yang dapat dihitung berdasarkan tanggal pendaftaran dan tanggal saat ini.
-   - **Menggabungkan fitur**: Misalnya, menggabungkan frekuensi penggunaan dan jenis layanan untuk membentuk fitur baru yang lebih informatif.
+6. **Handling Class Imbalance**  
+   - Menggunakan **SMOTE (Synthetic Minority Over-sampling Technique)** untuk menangani ketidakseimbangan kelas pada variabel target (`churn`).
 
-### Alasan Mengapa Data Preparation Diperlukan
+7. **Feature Scaling**  
+   - Menggunakan `StandardScaler()` untuk melakukan normalisasi pada data numerik sebelum model dilatih.
 
-1. **Meningkatkan Kualitas Data**  
-   Data yang tidak bersih, duplikat, atau mengandung nilai yang hilang akan mempengaruhi akurasi dan validitas model. Tanpa pembersihan yang tepat, model akan mempelajari pola yang salah, menghasilkan prediksi yang tidak akurat.
+8. **Data Splitting**  
+   - Memisahkan dataset menjadi training dan testing set dengan `train_test_split()`.
 
-2. **Memastikan Data Konsisten**  
-   Data yang tidak terstandarisasi atau memiliki unit yang berbeda dapat membingungkan model, terutama algoritma yang mengandalkan perhitungan jarak atau bobot fitur. Penskalaan data memastikan bahwa semua fitur berada dalam rentang yang setara, menghindari dominasi fitur tertentu terhadap model.
-
-3. **Menangani Variabel Kategorikal**  
-   Sebagian besar algoritma machine learning, terutama yang berbasis matematika, tidak dapat langsung menangani data kategorikal. Oleh karena itu, encoding sangat diperlukan untuk mengubah data kategorikal menjadi format yang dapat dipahami oleh algoritma.
-
-4. **Memfasilitasi Proses Pelatihan dan Evaluasi**  
-   Pembagian data menjadi set pelatihan dan pengujian penting untuk menghindari overfitting dan memastikan model dapat dievaluasi secara objektif. Tanpa pemisahan data yang tepat, model dapat terlalu cocok dengan data pelatihan dan gagal saat diuji dengan data yang belum terlihat sebelumnya.
-
-5. **Meningkatkan Kinerja Model**  
-   Feature engineering membantu untuk memilih atau menciptakan fitur yang lebih representatif bagi masalah yang dihadapi. Fitur yang relevan dapat membantu model dalam memahami pola-pola penting dalam data, yang pada akhirnya meningkatkan prediksi model.
-
-Dengan tahapan data preparation yang baik, perusahaan telekomunikasi dapat membangun model yang lebih efisien dan akurat, yang pada gilirannya akan membantu mereka dalam memprediksi churn pelanggan, mengelompokkan pelanggan, dan memprediksi nilai umur pelanggan secara lebih efektif.
 
 ## Modeling
 ### **Algoritma yang Digunakan**
@@ -194,6 +178,49 @@ Dengan tahapan data preparation yang baik, perusahaan telekomunikasi dapat memba
   - `max_iter=500` (iterasi maksimum pelatihan).
 
 
+Parameter `GridSearchCV` yang digunakan sebagai berikut:
+
+```python
+grid_search_gb = GridSearchCV(
+    estimator=gb_model,         # Model yang akan dioptimalkan (Gradient Boosting model)
+    param_grid=param_grid_gb,   # Grid parameter yang akan dieksplorasi
+    cv=5,                       # Jumlah fold untuk cross-validation (5-fold CV)
+    scoring='roc_auc'           # Metrik evaluasi yang digunakan untuk memilih model terbaik (AUC-ROC)
+)
+```
+
+### Penjelasan Parameter:
+1. **`estimator`**:
+   - Ini adalah model pembelajaran mesin yang ingin dioptimalkan. Dalam hal ini, `gb_model` adalah model Gradient Boosting yang akan dioptimalkan menggunakan `GridSearchCV`.
+
+2. **`param_grid`**:
+   - Ini adalah dictionary yang berisi parameter dan nilai-nilai yang ingin dieksplorasi. Pada contoh Anda:
+     ```python
+     param_grid_gb = {
+         'n_estimators': [100],       # Jumlah estimators (pohon) dalam model
+         'learning_rate': [1.0],      # Tingkat pembelajaran (step size)
+         'max_depth': [3],            # Kedalaman maksimum setiap pohon
+         'subsample': [0.8]           # Proporsi sampel yang digunakan untuk melatih setiap pohon
+     }
+     ```
+     Nilai-nilai ini adalah kandidat yang akan diuji selama proses grid search.
+
+3. **`cv`**:
+   - Menentukan jumlah fold untuk cross-validation. Dalam hal ini, `cv=5` berarti data pelatihan akan dibagi menjadi 5 bagian, dan model akan dilatih serta dievaluasi sebanyak 5 kali dengan kombinasi data yang berbeda.
+
+4. **`scoring`**:
+   - Metrik evaluasi yang digunakan untuk mengevaluasi performa model. Dalam hal ini, `scoring='roc_auc'` berarti metrik AUC-ROC digunakan untuk memilih model terbaik. Anda juga dapat menggantinya dengan metrik lain seperti `'accuracy'`, `'recall'`, dll., sesuai kebutuhan.
+
+---
+
+### Hasil dari `GridSearchCV`:
+Setelah menjalankan `grid_search_gb.fit(X_train, y_train)`, Anda mendapatkan:
+- **`best_params_`**: Parameter terbaik yang ditemukan oleh `GridSearchCV`.
+- **`best_estimator_`**: Model dengan parameter terbaik yang telah dilatih pada data pelatihan.
+- **`cv_results_`**: Informasi tambahan tentang hasil cross-validation untuk setiap kombinasi parameter.
+
+
+
 ---
 
 ### **Kesimpulan**
@@ -211,25 +238,26 @@ Dengan tahapan data preparation yang baik, perusahaan telekomunikasi dapat memba
 ### **Hasil Evaluasi**
 | **Model**                | **AUC-ROC** | **Akurasi** | **Recall** |
 |--------------------------|-------------|-------------|------------|
-| Gradient Boosting (Awal) | 0.85        | 0.89        | 0.62       |
-| Neural Network           | 0.82        | 0.87        | 0.58       |
-| **Gradient Boosting (Tuning)** | **0.87** | **0.90** | **0.65** |
-| **Gradient Boosting + SMOTE** | 0.86      | 0.88        | **0.72**   |
+| Gradient Boosting (Awal)   |    0.50   |    0.78   |    0.03      |
+| Neural Network             |    0.50   |    0.80   |    0.00      |
+| Gradient Boosting (Tuning) |    0.50   |    0.80   |    0.01      |
+| Gradient Boosting + SMOTE  |    0.50   |    0.80   |    0.01      |
 
 ### **Analisis Bisnis**
 1. **Apakah model menjawab isu churn?**  
-   **Ya**. Model Gradient Boosting setelah tuning memiliki **AUC-ROC 0.87** dan **recall 0.72** (dengan SMOTE), yang menunjukkan kemampuan baik dalam mengidentifikasi pelanggan berisiko churn.
+   **Ya**. Model Gradient Boosting setelah tuning memiliki **AUC-ROC 0.50** dan **recall 0.01** (dengan SMOTE), yang menunjukkan performa model masih perlu ditingkatkan dalam mengidentifikasi pelanggan berisiko churn.
 
 2. **Apakah tujuan tercapai?**  
-   **Ya**. Tingkat recall meningkat dari 0.62 ke 0.72 setelah penerapan SMOTE, berarti model lebih efektif mendeteksi pelanggan yang benar-benar churn. Ini membantu perusahaan mengambil tindakan preventif.
+   **Sebagian**. Meskipun model memiliki akurasi yang tinggi (**0.80**), nilai **recall yang sangat rendah (0.01)** menunjukkan model masih kurang efektif dalam mendeteksi pelanggan yang benar-benar churn. Perlu dilakukan perbaikan lebih lanjut.
 
 3. **Dampak solusi**  
-   - **Prediksi Churn**: Model memungkinkan perusahaan memberikan insentif atau layanan khusus ke pelanggan berisiko, sehingga mengurangi churn.
-   - **SMOTE**: Meningkatkan recall sebesar **10%**, mengurangi risiko kehilangan pelanggan karena false negative.
-   - **Hyperparameter Tuning**: Meningkatkan AUC-ROC sebesar **2%**, meningkatkan keandalan prediksi.
+   - **Prediksi Churn**: Model saat ini belum cukup andal untuk memberikan prediksi churn yang akurat.
+   - **SMOTE**: Tidak memberikan peningkatan recall yang signifikan dalam kasus ini.
+   - **Hyperparameter Tuning**: Tidak meningkatkan AUC-ROC, recall, atau akurasi dibandingkan baseline.
 
 ### **Kesimpulan**
-- **Model Terbaik**: Gradient Boosting dengan hyperparameter tuning dan SMOTE (recall tertinggi **0.72**).
+- **Model Terbaik**: Tidak ada model yang menunjukkan performa yang cukup baik berdasarkan metrik evaluasi. Perlu dilakukan eksperimen lebih lanjut untuk meningkatkan performa model, terutama pada recall.
 - **Rekomendasi**:
-  - Fokus pada peningkatan recall untuk meminimalkan pelanggan churn yang terlewat.
-  - Implementasi model ini di sistem CRM perusahaan untuk otomatisasi alert pelanggan berisiko.
+  - Mengeksplorasi model lain seperti Random Forest atau XGBoost dengan tuning lebih lanjut.
+  - Memeriksa kembali fitur engineering dan preprocessing untuk memastikan model dapat menangkap pola yang lebih baik.
+  - Menggunakan teknik lain untuk menangani ketidakseimbangan kelas selain SMOTE, seperti cost-sensitive learning atau penalized models.
