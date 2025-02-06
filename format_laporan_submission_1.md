@@ -130,7 +130,136 @@ Dataset ini siap untuk diproses lebih lanjut setelah memastikan tidak ada missin
 ```python
 df.drop_duplicates(inplace=True)
 ```
-…4. Fitur numerik telah distandarisasi.
+- **`drop_duplicates()`**:
+  - Menghapus baris duplikat dari dataset.
+  - Parameter `inplace=True` memastikan perubahan diterapkan langsung pada DataFrame tanpa perlu membuat salinan baru.
+
+---
+
+#### **b. Menghapus Kolom Tidak Relevan**
+```python
+df = df.drop("customer_id", axis=1)
+```
+- **`drop()`**:
+  - Menghapus kolom `customer_id` karena tidak relevan untuk analisis atau pemodelan.
+  - Parameter `axis=1` menunjukkan bahwa kita menghapus kolom (bukan baris).
+
+---
+
+### **2. Transformasi Data**
+
+#### **a. Mengonversi Tanggal ke Format Datetime**
+```python
+df['date_of_registration'] = pd.to_datetime(df['date_of_registration'])
+```
+- **`pd.to_datetime()`**:
+  - Mengonversi kolom `date_of_registration` menjadi tipe data `datetime`.
+  - Ini memungkinkan manipulasi tanggal, seperti penghitungan selisih waktu.
+
+---
+
+#### **b. Menghitung Lama Pelanggan Sejak Registrasi**
+```python
+df['days_since_registration'] = (pd.to_datetime('today') - df['date_of_registration']).dt.days
+df.drop('date_of_registration', axis=1, inplace=True)
+```
+- **`(pd.to_datetime('today') - df['date_of_registration'])`**:
+  - Menghitung selisih antara tanggal hari ini (`pd.to_datetime('today')`) dan tanggal registrasi (`df['date_of_registration']`).
+  - Hasilnya adalah objek `timedelta`.
+
+- **`.dt.days`**:
+  - Mengambil komponen "hari" dari objek `timedelta`.
+
+- **`df.drop('date_of_registration', axis=1, inplace=True)`**:
+  - Menghapus kolom asli `date_of_registration` karena sudah digantikan oleh fitur baru `days_since_registration`.
+
+---
+
+#### **c. Membuat Fitur Baru Berdasarkan Penggunaan Total**
+```python
+df['total_usage'] = df['calls_made'] + df['sms_sent'] + df['data_used']
+```
+- **`df['total_usage']`**:
+  - Membuat fitur baru bernama `total_usage`, yang merupakan gabungan dari jumlah panggilan (`calls_made`), SMS (`sms_sent`), dan penggunaan data (`data_used`).
+  - Fitur ini dapat membantu dalam menganalisis pola penggunaan pelanggan secara keseluruhan.
+
+---
+
+### **3. Encoding dan Scaling**
+
+#### **a. One-Hot Encoding untuk Fitur Kategorikal**
+```python
+X = pd.get_dummies(X, columns=['telecom_partner', 'gender', 'state', 'city'], drop_first=True)
+```
+- **`pd.get_dummies()`**:
+  - Melakukan **One-Hot Encoding** untuk fitur kategorikal seperti `telecom_partner`, `gender`, `state`, dan `city`.
+  - Parameter `drop_first=True` menghilangkan salah satu kategori untuk menghindari **multikolinearitas** (masalah dummy variable trap).
+
+---
+
+#### **b. Normalisasi/Standarisasi Fitur Numerik**
+```python
+numerical_cols = X.select_dtypes(include=np.number).columns
+scaler = StandardScaler()
+X[numerical_cols] = scaler.fit_transform(X[numerical_cols])
+```
+- **`select_dtypes(include=np.number)`**:
+  - Memilih hanya kolom numerik dari DataFrame.
+
+- **`StandardScaler()`**:
+  - Menggunakan **StandardScaler** untuk melakukan standarisasi pada fitur numerik.
+  - Standarisasi mengubah data agar memiliki mean 0 dan standar deviasi 1, sehingga semua fitur memiliki skala yang seragam.
+
+- **`fit_transform()`**:
+  - Melakukan fitting dan transformasi sekaligus pada data numerik.
+
+---
+
+### **4. Split Data untuk Pelatihan dan Pengujian**
+
+#### **a. Memisahkan Fitur (X) dan Target (y)**
+```python
+X = df.drop('churn', axis=1)
+y = df['churn']
+```
+- **`X`**:
+  - Berisi semua fitur independen (variabel prediktor) yang akan digunakan untuk melatih model.
+
+- **`y`**:
+  - Berisi variabel target (`churn`) yang ingin diprediksi.
+
+---
+
+#### **b. Membagi Dataset Menjadi Training dan Testing**
+```python
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+```
+- **`train_test_split()`**:
+  - Membagi dataset menjadi dua bagian: **80% untuk training** dan **20% untuk testing**.
+  - Parameter `random_state=42` memastikan hasil pembagian konsisten setiap kali kode dijalankan.
+
+---
+
+#### **c. Menyeimbangkan Data Menggunakan SMOTE**
+```python
+smote = SMOTE(random_state=42)
+X_train_resampled, y_train_resampled = smote.fit_resample(X_train, y_train)
+```
+- **`SMOTE()`**:
+  - **Synthetic Minority Over-sampling Technique (SMOTE)** digunakan untuk menyeimbangkan distribusi kelas dalam dataset.
+  - Teknik ini menciptakan sampel sintetis untuk kelas minoritas agar jumlahnya seimbang dengan kelas mayoritas.
+
+- **`fit_resample()`**:
+  - Melakukan oversampling pada data training (`X_train` dan `y_train`) untuk menghasilkan dataset yang seimbang.
+
+---
+
+### **Output Akhir**
+Setelah menjalankan semua langkah di atas:
+1. Dataset telah dibersihkan dari duplikat dan kolom tidak relevan.
+2. Fitur baru (`days_since_registration` dan `total_usage`) telah dibuat.
+3. Data kategorikal telah diubah menjadi format numerik menggunakan One-Hot Encoding.
+4. Fitur numerik telah distandarisasi.
 5. Dataset telah dibagi menjadi data training dan testing.
 6. Data training telah diseimbangkan menggunakan SMOTE.
 
