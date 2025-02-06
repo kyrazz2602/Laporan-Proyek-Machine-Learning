@@ -122,38 +122,17 @@ Dataset ini siap untuk diproses lebih lanjut setelah memastikan tidak ada missin
 
 ## Data Preparation
 
-Data preparation adalah langkah penting dalam proses pengolahan data sebelum model machine learning atau deep learning dapat diterapkan. Tahap ini bertujuan untuk memastikan bahwa data yang digunakan berkualitas tinggi, bebas dari noise, dan relevan dengan masalah yang ingin diselesaikan. Berikut adalah beberapa tahapan dalam data preparation yang dilakukan untuk solusi yang diusulkan:
+---
 
-1. **Load Dataset**  
-   - Menggunakan `pd.read_csv()` untuk membaca dataset bernama `telecom_churn.csv`.
+### **1. Pembersihan Data (Data Cleaning)**
 
-2. **Exploratory Data Analysis (EDA) Awal**  
-   - `df.head()` untuk melihat beberapa baris pertama dataset.  
-   - `df.info()` untuk melihat tipe data dan informasi umum dataset.  
-   - `df.describe()` untuk melihat statistik deskriptif.  
-   - `df.isnull().sum()` untuk mengecek jumlah missing values.  
-   - `df.duplicated().sum()` untuk mengecek jumlah duplikasi.
-
-3. **Handling Duplicate Data**  
-   - `df.drop_duplicates(inplace=True)` digunakan untuk menghapus data yang duplikat.
-
-4. **Feature Selection**  
-   - Menghapus kolom yang tidak diperlukan (`customer_id`) dengan `df.drop("customer_id", axis=1)`, yang kemungkinan merupakan identifikasi unik pelanggan.
-
-5. **Handling Missing Values**  
-   - Iterasi melalui semua kolom dataset dan mengisi nilai yang hilang:
-     - Jika tipe data numerik: Digantikan dengan median atau mean.  
-     - Jika tipe data kategorikal: Digantikan dengan modus.
-
-6. **Handling Class Imbalance**  
-   - Menggunakan **SMOTE (Synthetic Minority Over-sampling Technique)** untuk menangani ketidakseimbangan kelas pada variabel target (`churn`).
-
-7. **Feature Scaling**  
-   - Menggunakan `StandardScaler()` untuk melakukan normalisasi pada data numerik sebelum model dilatih.
-
-8. **Data Splitting**  
-   - Memisahkan dataset menjadi training dan testing set dengan `train_test_split()`.
-
+#### **a. Menghapus Baris Duplikat**
+```python
+df.drop_duplicates(inplace=True)
+```
+…4. Fitur numerik telah distandarisasi.
+5. Dataset telah dibagi menjadi data training dan testing.
+6. Data training telah diseimbangkan menggunakan SMOTE.
 
 ## Modeling
 ### **Algoritma yang Digunakan**
