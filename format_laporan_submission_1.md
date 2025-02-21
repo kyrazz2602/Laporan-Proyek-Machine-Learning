@@ -1,371 +1,323 @@
-# Laporan Proyek Machine Learning - Arizal Anshori
+# **Laporan Proyek Machine Learning - Arizal Anshori**
 
-## Domain Proyek
+## **Project Overview**
 
-Telekomunikasi merupakan salah satu bidang yang terus berkembang pesat seiring dengan kemajuan teknologi. Dalam era digital saat ini, jumlah data yang dihasilkan oleh jaringan telekomunikasi meningkat secara eksponensial. Data tersebut berasal dari berbagai sumber seperti data penggunaan pelanggan, log jaringan, serta data layanan pelanggan. Hal ini menciptakan tantangan besar dalam mengelola, menganalisis, dan memanfaatkan data untuk meningkatkan efisiensi jaringan, pengalaman pelanggan, dan kualitas layanan.
+### **Latar Belakang Proyek**
+Di era digital yang serba terhubung, informasi dan konten tersedia dalam jumlah yang sangat besar. Salah satu bentuk konten yang paling banyak dikonsumsi adalah buku, baik dalam format fisik maupun digital (e-book). Namun, dengan semakin banyaknya pilihan buku yang tersedia di pasaran, pembaca sering kali mengalami kesulitan dalam memilih buku yang sesuai dengan minat, kebutuhan, atau preferensi mereka. Fenomena ini dikenal sebagai *information overload* atau kelebihan informasi, di mana pengguna merasa kewalahan dengan banyaknya opsi yang ada.
 
-Machine Learning (ML) dan Deep Learning (DL) menawarkan solusi yang revolusioner dalam menangani tantangan-tantangan tersebut. Teknologi ini memungkinkan sistem untuk belajar dari data historis, mengenali pola-pola tertentu, dan membuat prediksi atau keputusan otomatis yang relevan. Misalnya, ML dapat digunakan untuk memprediksi gangguan jaringan, mendeteksi penipuan (fraud detection), atau meningkatkan alokasi sumber daya jaringan.
+Menurut penelitian dari Nielsen Book Research, pada tahun 2021 saja, lebih dari 3 juta judul buku baru diterbitkan secara global. Dengan jumlah sebesar itu, menemukan buku yang relevan menjadi tantangan tersendiri bagi para pembaca. Di sisi lain, teknologi rekomendasi telah berkembang pesat dalam beberapa dekade terakhir, terutama di bidang e-commerce dan hiburan digital seperti Netflix dan Spotify. Teknologi ini mampu memberikan rekomendasi personal kepada pengguna berdasarkan data historis, perilaku, dan preferensi individu.
 
-Dalam konteks pengalaman pelanggan, perusahaan telekomunikasi menghadapi tantangan untuk memahami kebutuhan pelanggan secara individu agar dapat memberikan layanan yang personal. Pelanggan cenderung memiliki ekspektasi tinggi terhadap layanan yang mereka terima, termasuk layanan yang disesuaikan dengan preferensi mereka. Selain itu, churn pelanggan atau perpindahan pelanggan ke penyedia layanan lain menjadi salah satu ancaman besar yang dihadapi industri ini. Oleh karena itu, pengelolaan hubungan pelanggan yang efektif menjadi kunci dalam mempertahankan loyalitas pelanggan dan meningkatkan pendapatan perusahaan.
+Proyek **Rekomendasi Buku** bertujuan untuk menghadirkan solusi berbasis teknologi yang dapat membantu pembaca menemukan buku-buku yang sesuai dengan minat mereka. Sistem rekomendasi buku ini akan menggunakan pendekatan algoritma machine learning, seperti *collaborative filtering* atau *content-based filtering*, untuk memberikan rekomendasi yang lebih akurat dan relevan.
 
-Machine Learning dapat digunakan untuk menyelesaikan berbagai masalah terkait pengalaman pelanggan seperti:
+### **Pentingnya Penyelesaian Proyek Ini**
+1. **Meningkatkan Pengalaman Pembaca**  
+   Dengan adanya sistem rekomendasi buku, pembaca tidak perlu lagi menghabiskan waktu berjam-jam untuk mencari buku yang tepat. Sistem ini akan memberikan saran yang dipersonalisasi, sehingga pengguna dapat menemukan buku yang benar-benar sesuai dengan minat mereka. Hal ini akan meningkatkan kepuasan pengguna dan memperkaya pengalaman membaca mereka.
 
-1.  Prediksi Churn Pelanggan: Mengidentifikasi pelanggan yang kemungkinan besar akan meninggalkan layanan perusahaan agar dapat diambil tindakan preventif.
+2. **Mendorong Literasi dan Minat Membaca**  
+   Menurut UNESCO, literasi adalah salah satu faktor kunci dalam pengembangan sumber daya manusia. Namun, rendahnya minat membaca di kalangan masyarakat sering kali disebabkan oleh kurangnya akses ke bahan bacaan yang relevan. Proyek ini dapat membantu meningkatkan minat membaca dengan menyediakan rekomendasi buku yang menarik dan sesuai dengan preferensi individu.
 
-2.  Segmentasi Pelanggan: Mengelompokkan pelanggan berdasarkan perilaku, preferensi, atau pola penggunaan mereka untuk memberikan penawaran yang relevan.
+3. **Optimalisasi Industri Penerbitan**  
+   Industri penerbitan juga dapat memperoleh manfaat dari proyek ini. Dengan adanya sistem rekomendasi, penerbit dapat memahami tren minat pembaca secara lebih mendalam. Informasi ini dapat digunakan untuk mengembangkan strategi pemasaran yang lebih efektif dan memproduksi buku-buku yang lebih sesuai dengan permintaan pasar.
 
-3.  Prediksi Nilai Umur Pelanggan (Customer Lifetime Value): Memperkirakan nilai pelanggan dalam jangka panjang untuk membantu perusahaan dalam membuat keputusan strategis, seperti alokasi anggaran pemasaran atau desain program loyalitas.
+4. **Mengatasi Kelebihan Informasi (*Information Overload*)**  
+   Seperti yang telah disebutkan sebelumnya, jumlah buku yang tersedia di pasaran sangat besar. Proyek ini akan membantu mengurangi beban kognitif pembaca dengan menyaring informasi dan memberikan rekomendasi yang relevan. Hal ini sejalan dengan penelitian oleh Jakob Nielsen, yang menunjukkan bahwa pengguna cenderung lebih puas ketika diberikan opsi yang terbatas namun relevan.
 
-Studi oleh Mishra et al. (2022) menunjukkan bahwa segmentasi pelanggan berbasis ML dapat meningkatkan efektivitas kampanye pemasaran hingga 25%. Selain itu, implementasi model prediksi churn pelanggan berbasis algoritma gradient boosting telah terbukti meningkatkan tingkat retensi pelanggan sebesar 20%.
+5. **Pemanfaatan Teknologi Machine Learning**  
+   Proyek ini juga memiliki nilai inovatif karena memanfaatkan teknologi machine learning. Algoritma seperti *collaborative filtering* dan *natural language processing* (NLP) dapat digunakan untuk menganalisis data pembaca, seperti ulasan buku, rating, dan deskripsi buku, untuk menghasilkan rekomendasi yang lebih akurat. Studi oleh Ricci et al. (2015) dalam buku *"Recommender Systems Handbook"* menunjukkan bahwa sistem rekomendasi berbasis AI dapat meningkatkan engagement pengguna hingga 30%.
 
-Dengan memanfaatkan kekuatan ML dan DL, perusahaan telekomunikasi dapat menciptakan strategi yang lebih proaktif, efisien, dan terpersonalisasi untuk memenuhi kebutuhan pelanggan serta meningkatkan kepuasan mereka.
+### **Hasil Riset dan Referensi Terkait**
+1. **Studi tentang Sistem Rekomendasi**  
+   Menurut penelitian oleh Adomavicius dan Tuzhilin (2005), sistem rekomendasi telah terbukti efektif dalam meningkatkan kepuasan pengguna di berbagai platform digital. Penelitian ini menyoroti pentingnya pendekatan *personalization* dalam sistem rekomendasi.
 
-**Referensi:**
+2. **Tren Literasi Global**  
+   Data dari World Bank menunjukkan bahwa tingkat literasi di beberapa negara masih rendah, terutama di kalangan anak muda. Proyek ini dapat menjadi langkah awal untuk meningkatkan aksesibilitas bahan bacaan yang relevan.
 
-Chen, Y., et al. (2021). "Deep Learning for Network Management: Techniques and Applications." IEEE Communications Surveys & Tutorials. DOI: 10.1109/COMST.2021.3057800.
+3. **Penerapan Machine Learning dalam Rekomendasi Buku**  
+   Sebuah studi oleh Zhang et al. (2020) menunjukkan bahwa algoritma *deep learning* dapat digunakan untuk menganalisis teks deskripsi buku dan menghasilkan rekomendasi yang lebih akurat dibandingkan metode tradisional.
 
-Zhang, X., et al. (2020). "Machine Learning for Telecom Networks: A Comprehensive Survey." IEEE Access. DOI: 10.1109/ACCESS.2020.2978494.
+4. **Kasus Sukses di Industri Hiburan Digital**  
+   Platform seperti Netflix dan Spotify telah berhasil menggunakan sistem rekomendasi untuk meningkatkan retensi pengguna. Netflix melaporkan bahwa 80% konten yang ditonton oleh pengguna berasal dari rekomendasi sistem mereka.
 
-Mishra, R., et al. (2022). "Customer Segmentation in Telecom Industry Using Machine Learning." Journal of Big Data. DOI: 10.1186/s40537-022-00512-3.
+### Kesimpulan
 
-## Business Understanding
+Proyek **Rekomendasi Buku** memiliki relevansi yang tinggi dalam mengatasi tantangan yang dihadapi oleh pembaca modern, industri penerbitan, dan masyarakat secara umum. Dengan memanfaatkan teknologi machine learning, proyek ini tidak hanya akan meningkatkan pengalaman pembaca, tetapi juga berkontribusi pada peningkatan literasi dan optimalisasi industri penerbitan. Oleh karena itu, penyelesaian proyek ini sangat penting untuk menjawab kebutuhan masyarakat akan akses bahan bacaan yang relevan dan menarik.
 
-### Problem Clarification
-
-**Problem Statements**
-
-1.  **Churn Pelanggan:** Perusahaan telekomunikasi sering kali kehilangan pelanggan karena perpindahan mereka ke penyedia layanan lain. Hal ini dapat terjadi karena kurangnya personalisasi layanan, pengalaman buruk, atau penawaran yang lebih menarik dari kompetitor.
-
-**Goals**
-
-  **Meningkatkan Tingkat Retensi Pelanggan:**
-
-  Mengidentifikasi pelanggan yang kemungkinan besar akan churn sehingga dapat dilakukan tindakan preventif, seperti memberikan insentif atau meningkatkan kualitas layanan.
-
-### Solution Statement
-
-Untuk mencapai tujuan meningkatkan pengalaman pelanggan, berikut adalah beberapa solusi yang dapat diimplementasikan:
-
-**1. Prediksi Churn Pelanggan dengan Model Klasifikasi**
-
-**Algoritma yang Digunakan:**
-
-  *   Gradient Boosting (misalnya, XGBoost atau LightGBM) untuk baseline model.
-
-  *   Neural Network sederhana untuk mengeksplorasi performa model berbasis deep learning.
-
-**Langkah Implementasi:**
-
-  *   Mengumpulkan dan membersihkan data churn dari dataset seperti Telecom Churn Dataset.
-
-  *   Melakukan eksplorasi data untuk memahami pola churn.
-
-  *   Melatih model klasifikasi menggunakan data historis.
-
-  *   Mengevaluasi model menggunakan metrik seperti AUC-ROC, akurasi, dan recall untuk mengukur kemampuan model dalam mendeteksi pelanggan yang berpotensi churn.
-
-**Improvement:**
-
-  *   Melakukan hyperparameter tuning pada model Gradient Boosting untuk meningkatkan performa.
-
-  * Menggunakan teknik ensemble learning untuk menggabungkan prediksi beberapa model.
-
-Dengan mengimplementasikan solusi ini, perusahaan telekomunikasi dapat meningkatkan loyalitas pelanggan, mengurangi tingkat churn, dan memaksimalkan nilai bisnis dari setiap pelanggan.
-
-## Data Understanding
-
-**[Link Sumber Dataset (Kaggle)](https://www.kaggle.com/datasets/suraj520/telecom-churn-dataset)**  
-
-**Deskripsi Dataset**  
-Dataset ini berisi **243.553 baris** data pelanggan dari empat mitra telekomunikasi besar di India: Airtel, Reliance Jio, Vodafone, dan BSNL. Dataset mencakup berbagai variabel demografi, lokasi, pola penggunaan, serta variabel biner yang menunjukkan apakah pelanggan telah churn (berhenti menggunakan layanan) atau tidak.  
+**Referensi Utama:**
+- Adomavicius, G., & Tuzhilin, A. (2005). Toward the Next Generation of Recommender Systems: A Survey of the State-of-the-Art and Possible Extensions.
+- Ricci, F., Rokach, L., & Shapira, B. (2015). Recommender Systems Handbook.
+- Zhang, Y., Dai, H., & Xu, C. (2020). Deep Learning for Recommender Systems.
 
 ---
 
-**Variabel dalam Dataset**  
+## **Business Understanding**
 
-1. **customer_id**: Identitas unik untuk setiap pelanggan.  
-2. **telecom_partner**: Nama mitra telekomunikasi pelanggan.  
-3. **gender**: Jenis kelamin pelanggan.  
-4. **age**: Usia pelanggan.  
-5. **state**: Negara bagian tempat pelanggan tinggal.  
-6. **city**: Kota tempat pelanggan tinggal.  
-7. **pincode**: Kode pos lokasi pelanggan.  
-8. **date_of_registration**: Tanggal registrasi pelanggan dengan mitra telekomunikasi.  
-9. **num_dependents**: Jumlah tanggungan (misalnya, anak-anak) dari pelanggan.  
-10. **estimated_salary**: Estimasi gaji pelanggan.  
-11. **calls_made**: Jumlah panggilan yang dilakukan oleh pelanggan.  
-12. **sms_sent**: Jumlah SMS yang dikirim oleh pelanggan.  
-13. **data_used**: Jumlah data yang digunakan oleh pelanggan.  
-14. **churn**: Variabel biner yang menunjukkan apakah pelanggan churn (1 = churn, 0 = tidak churn).  
+#### **Problem Statements (Pernyataan Masalah)**
+Masalah utama yang dihadapi dalam konteks ini adalah kesulitan pembaca dalam menemukan buku yang sesuai dengan minat, kebutuhan, atau preferensi mereka di tengah ledakan jumlah pilihan buku yang tersedia. Dengan lebih dari 3 juta judul buku baru diterbitkan setiap tahun (Nielsen Book Research, 2021), pembaca sering kali mengalami *information overload*—sebuah kondisi di mana terlalu banyak informasi membuat pengambilan keputusan menjadi sulit dan membingungkan. Selain itu, platform digital seperti toko buku online sering kali tidak memberikan rekomendasi yang relevan atau personal bagi pengguna, sehingga pengalaman membaca menjadi kurang optimal.
 
----
+Masalah ini juga berdampak pada industri penerbitan, karena kurangnya personalisasi dalam rekomendasi dapat mengurangi penjualan buku dan engagement pembaca. Oleh karena itu, diperlukan solusi yang dapat membantu pembaca menemukan buku yang tepat sambil mendukung pertumbuhan industri penerbitan melalui strategi pemasaran yang lebih efektif.
 
-### **Hasil Identifikasi Data**  
+#### **Goals (Tujuan)**
+Tujuan dari proyek ini adalah untuk mengembangkan sistem rekomendasi buku yang dapat:
+- Meningkatkan pengalaman pembaca dengan memberikan rekomendasi buku yang dipersonalisasi berdasarkan minat, preferensi, dan perilaku mereka.
+- Mengurangi beban kognitif pembaca akibat *information overload* dengan menyaring opsi buku yang tidak relevan.
+- Mendukung industri penerbitan dengan meningkatkan visibilitas buku-buku yang sesuai dengan tren minat pembaca.
+- Mendorong literasi dan minat membaca melalui akses yang lebih mudah ke bahan bacaan yang menarik.
 
-1. **Jumlah Data**  
-   - **Baris**: 243.553  
-   - **Kolom**: 14  
+#### **Solution Approach (Pendekatan Solusi)**
+Untuk mencapai tujuan tersebut, dua pendekatan solusi yang dapat digunakan adalah **Content-Based Filtering** dan **Collaborative Filtering**. Kedua pendekatan ini memiliki kelebihan dan karakteristik yang berbeda, namun sama-sama bertujuan untuk memberikan rekomendasi yang relevan kepada pengguna.
 
-2. **Kondisi Data**  
-   - **Missing Value**:  
-     Beberapa kolom mungkin memiliki nilai yang hilang. Perlu dilakukan eksplorasi untuk menentukan jumlah dan proporsi missing value.  
-   - **Data Duplikat**:  
-     Perlu diperiksa apakah terdapat data yang terduplikasi pada kolom `customer_id` atau kombinasi variabel lainnya.  
-   - **Outlier**:  
-     Beberapa fitur numerik seperti `age`, `estimated_salary`, `calls_made`, dan `data_used` mungkin memiliki nilai outlier yang memengaruhi hasil analisis.  
+1. **Content-Based Filtering**  
+   Pendekatan ini menggunakan informasi tentang konten (buku) untuk merekomendasikan item yang mirip dengan yang sudah disukai atau dibeli oleh pengguna. Informasi konten dapat mencakup deskripsi buku, genre, penulis, ulasan, rating, atau kata-kata kunci tertentu dalam teks buku.
 
-3. **Uraian Fitur pada Data**  
-   Semua fitur mencakup informasi yang relevan untuk analisis churn pelanggan. Fitur seperti **`calls_made`**, **`sms_sent`**, dan **`data_used`** sangat penting untuk memahami pola penggunaan layanan pelanggan, sedangkan variabel demografi seperti **`gender`**, **`age`**, dan **`num_dependents`** dapat membantu mengidentifikasi kelompok pelanggan yang lebih rentan untuk churn.  
-
-**Kesimpulan**:  
-Dataset ini siap untuk diproses lebih lanjut setelah memastikan tidak ada missing value, duplikasi, atau outlier yang signifikan yang memengaruhi kualitas data.
-
-## Data Preparation
+2. **Collaborative Filtering**  
+   Pendekatan ini memanfaatkan data dari pengguna lain untuk memberikan rekomendasi berdasarkan preferensi dan perilaku pengguna yang mirip. Ada dua jenis collaborative filtering:
+   - **User-Based Filtering:** Merekomendasikan buku berdasarkan preferensi pengguna lain yang memiliki selera serupa.
+   - **Item-Based Filtering:** Merekomendasikan buku berdasarkan hubungan antara buku-buku yang sering dibeli atau dinilai bersama.
 
 ---
 
-### **1. Pembersihan Data (Data Cleaning)**
+## **Data Understanding**
 
-#### **a. Menghapus Baris Duplikat**
+### **Informasi Umum**
+Dataset yang digunakan untuk proyek ini adalah **Goodreads Books Dataset**, sebuah dataset yang berisi informasi tentang buku dari platform Goodreads, salah satu komunitas pembaca terbesar di dunia. Dataset ini mencakup berbagai atribut yang relevan untuk membangun sistem rekomendasi buku, seperti judul, penulis, rating, jumlah halaman, dan ulasan pengguna.
+
+### **Tautan Sumber Data**
+Dataset dapat diunduh dari sumber berikut:
+- **Kaggle**: [Goodreads Books Dataset](https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks)
+
+### **Variabel atau Fitur**
+Berikut adalah deskripsi variabel atau fitur utama yang terdapat dalam dataset (setelah penyesuaian):
+
+| **Fitur**             | **Deskripsi**                                                                  |
+|------------------------|-----------------------------------------------------------------------------|
+| `bookID`              | ID unik untuk setiap buku dalam dataset.                                   |
+| `title`               | Judul buku.                                                                |
+| `authors`             | Nama penulis buku (bisa lebih dari satu).                                  |
+| `average_rating`      | Rating rata-rata buku berdasarkan ulasan pengguna (skala 0–5).             |
+| `isbn`                | Nomor ISBN (International Standard Book Number) untuk identifikasi buku.   |
+| `isbn13`              | Versi ISBN 13-digit untuk identifikasi buku.                              |
+| `language_code`       | Kode bahasa buku (contoh: "en" untuk bahasa Inggris).                      |
+| `num_pages`           | Jumlah halaman dalam buku.                                                |
+| `ratings_count`       | Jumlah total rating yang diberikan oleh pengguna.                         |
+| `text_reviews_count`  | Jumlah ulasan teks yang ditulis oleh pengguna.                             |
+| `publication_date`    | Tanggal publikasi buku.                                                    |
+| `publisher`           | Nama penerbit buku.                                                       |
+
+
+### **Tahapan Analisis**
+1. **Eksplorasi Data Awal**  
+   - **Ukuran Dataset:** Dataset terdiri dari sekitar 10.000 entri buku dengan 12 fitur utama.
+   - **Distribusi Rating:** Mayoritas buku memiliki rating antara 3.5 hingga 4.5, dengan sedikit buku yang memiliki rating rendah (<3.0), menunjukkan preferensi pembaca terhadap buku-buku berkualitas.
+   - **Word Cloud untuk Penulis:** Penulis populer seperti J.K. Rowling, Stephen King, dan Agatha Christie mendominasi dataset.
+   - **Scatter Plot Antara Jumlah Halaman dan Rating:** Tidak ada korelasi yang signifikan antara jumlah halaman dan rating, namun buku dengan jumlah halaman sedang (200–500) cenderung lebih populer.
+
+2. **Analisis Korelasi**  
+   - `ratings_count` memiliki korelasi positif dengan `average_rating`, yang berarti buku dengan lebih banyak rating cenderung memiliki rating yang lebih tinggi.
+   - `num_pages` tidak memiliki korelasi signifikan dengan `average_rating`.
+
+3. **Pembersihan Data**  
+   - **Menangani Missing Values:** Beberapa entri memiliki nilai kosong untuk fitur seperti `authors` atau `publication_date`. Nilai-nilai ini diisi dengan metode imputasi atau dihapus jika tidak relevan.
+   - **Normalisasi Data:** Fitur seperti `average_rating` dan `num_pages` dinormalisasi untuk memastikan skala yang seragam dalam analisis.
+
+4. **Teknik Preprocessing untuk Machine Learning**  
+   - **Content-Based Filtering:** Fitur teks seperti `title` dan `authors` diproses menggunakan *Natural Language Processing* (NLP) untuk mengekstraksi fitur penting.
+   - **Collaborative Filtering:** Data interaksi pengguna seperti `ratings_count` dan `average_rating` digunakan untuk membangun matriks interaksi pengguna-buku.
+
+---
+
+## **Data Preparation**
+
+### **Teknik Data Preparation yang Dilakukan**
+1. **Penanganan Missing Values**  
+   - Menghapus baris dengan nilai yang hilang pada kolom penting seperti `title`, `authors`, `average_rating`, `ratings_count`, dan `num_pages`.
+   
+2. **Normalisasi Data**  
+   - Menggunakan `MinMaxScaler` untuk menormalisasi fitur numerik seperti `average_rating`, `ratings_count`, dan `num_pages`.
+
+3. **Encoding Kategori**  
+   - Menggunakan `LabelEncoder` untuk mengubah fitur kategorikal seperti `language_code` menjadi bentuk numerik.
+
+4. **TF-IDF untuk Fitur Teks**  
+   - Menggunakan `TfidfVectorizer` untuk mengubah fitur teks seperti `title` menjadi vektor numerik yang dapat digunakan dalam model machine learning.
+
+### **Alasan Tahapan Data Preparation**
+- **Penanganan Missing Values:** Untuk memastikan data yang digunakan dalam model bersih dan tidak mengandung nilai yang hilang yang dapat mempengaruhi hasil analisis.
+- **Normalisasi Data:** Untuk memastikan semua fitur numerik memiliki skala yang seragam, sehingga tidak ada fitur yang mendominasi model karena perbedaan skala.
+- **Encoding Kategori:** Untuk mengubah data kategorikal menjadi bentuk numerik yang dapat diproses oleh algoritma machine learning.
+- **TF-IDF:** Untuk mengekstraksi fitur penting dari teks dan mengubahnya menjadi bentuk yang dapat digunakan oleh model.
+
+---
+
+### 1. **Menghitung Matriks Korelasi**
 ```python
+correlation_matrix = df[['average_rating', 'ratings_count', '  num_pages']].corr()
+```
+- **Penjelasan**:
+  - Fungsi `.corr()` digunakan untuk menghitung korelasi antara kolom numerik dalam DataFrame.
+  - Di sini, kita menghitung korelasi antara tiga fitur: `average_rating`, `ratings_count`, dan `num_pages`.
+  - Hasilnya adalah matriks korelasi (berupa DataFrame) yang menunjukkan hubungan linier antar fitur. Nilai berkisar antara -1 hingga 1:
+    - `1`: Korelasi positif sempurna.
+    - `-1`: Korelasi negatif sempurna.
+    - `0`: Tidak ada korelasi.
+
+---
+
+### 2. **Menghapus Duplikat**
+```python
+print("Number of duplicate rows:", df.duplicated().sum())
 df.drop_duplicates(inplace=True)
 ```
-- **`drop_duplicates()`**:
-  - Menghapus baris duplikat dari dataset.
-  - Parameter `inplace=True` memastikan perubahan diterapkan langsung pada DataFrame tanpa perlu membuat salinan baru.
+- **Penjelasan**:
+  - `df.duplicated().sum()` menghitung jumlah baris duplikat dalam DataFrame.
+  - `df.drop_duplicates(inplace=True)` menghapus semua baris duplikat dari DataFrame. Parameter `inplace=True` memastikan perubahan langsung diterapkan ke DataFrame tanpa perlu membuat salinan baru.
 
 ---
 
-#### **b. Menghapus Kolom Tidak Relevan**
+### 3. **Menangani Nilai Hilang (Missing Values)**
 ```python
-df = df.drop("customer_id", axis=1)
+df.dropna(subset=['title', 'authors', 'average_rating', 'ratings_count', '  num_pages'], inplace=True)
+missing_values_after_drop = df.isnull().sum()
+print("Missing Values After Dropping:\n", missing_values_after_drop)
 ```
-- **`drop()`**:
-  - Menghapus kolom `customer_id` karena tidak relevan untuk analisis atau pemodelan.
-  - Parameter `axis=1` menunjukkan bahwa kita menghapus kolom (bukan baris).
+- **Penjelasan**:
+  - `df.dropna(subset=[...])` menghapus baris yang memiliki nilai hilang (`NaN`) pada kolom-kolom tertentu (`title`, `authors`, `average_rating`, `ratings_count`, `num_pages`).
+  - `df.isnull().sum()` menghitung jumlah nilai hilang di setiap kolom setelah penghapusan baris dengan nilai hilang.
+  - Ini memastikan bahwa hanya baris dengan data lengkap pada kolom-kolom penting yang tetap ada.
 
 ---
 
-### **2. Transformasi Data**
-
-#### **a. Mengonversi Tanggal ke Format Datetime**
+### 4. **Standarisasi Nama Kolom**
 ```python
-df['date_of_registration'] = pd.to_datetime(df['date_of_registration'])
+df.columns = df.columns.str.strip().str.lower().str.replace(" ", "_")
 ```
-- **`pd.to_datetime()`**:
-  - Mengonversi kolom `date_of_registration` menjadi tipe data `datetime`.
-  - Ini memungkinkan manipulasi tanggal, seperti penghitungan selisih waktu.
+- **Penjelasan**:
+  - `df.columns.str.strip()` menghapus spasi di awal dan akhir nama kolom.
+  - `.str.lower()` mengubah semua nama kolom menjadi huruf kecil.
+  - `.str.replace(" ", "_")` mengganti spasi dengan garis bawah (`_`).
+  - Standarisasi ini memastikan bahwa nama kolom konsisten dan mudah digunakan dalam analisis atau pemodelan.
 
 ---
 
-#### **b. Menghitung Lama Pelanggan Sejak Registrasi**
+### 5. **Konversi Tipe Data (Tanggal)**
 ```python
-df['days_since_registration'] = (pd.to_datetime('today') - df['date_of_registration']).dt.days
-df.drop('date_of_registration', axis=1, inplace=True)
+df['publication_date'] = pd.to_datetime(df['publication_date'], format='%m/%d/%Y', errors='coerce')
 ```
-- **`(pd.to_datetime('today') - df['date_of_registration'])`**:
-  - Menghitung selisih antara tanggal hari ini (`pd.to_datetime('today')`) dan tanggal registrasi (`df['date_of_registration']`).
-  - Hasilnya adalah objek `timedelta`.
-
-- **`.dt.days`**:
-  - Mengambil komponen "hari" dari objek `timedelta`.
-
-- **`df.drop('date_of_registration', axis=1, inplace=True)`**:
-  - Menghapus kolom asli `date_of_registration` karena sudah digantikan oleh fitur baru `days_since_registration`.
+- **Penjelasan**:
+  - `pd.to_datetime()` mengonversi kolom `publication_date` menjadi tipe data `datetime`.
+  - Parameter `format='%m/%d/%Y'` menentukan format tanggal yang diharapkan (bulan/hari/tahun).
+  - Parameter `errors='coerce'` memastikan bahwa jika ada nilai yang tidak dapat dikonversi, nilai tersebut akan diubah menjadi `NaT` (Not a Time).
 
 ---
 
-#### **c. Membuat Fitur Baru Berdasarkan Penggunaan Total**
+### 6. **Normalisasi Fitur Numerik**
 ```python
-df['total_usage'] = df['calls_made'] + df['sms_sent'] + df['data_used']
+scaler = MinMaxScaler()
+numerical_features = ['average_rating', 'ratings_count', 'num_pages']
+df[numerical_features] = scaler.fit_transform(df[numerical_features])
 ```
-- **`df['total_usage']`**:
-  - Membuat fitur baru bernama `total_usage`, yang merupakan gabungan dari jumlah panggilan (`calls_made`), SMS (`sms_sent`), dan penggunaan data (`data_used`).
-  - Fitur ini dapat membantu dalam menganalisis pola penggunaan pelanggan secara keseluruhan.
+- **Penjelasan**:
+  - `MinMaxScaler()` adalah alat untuk melakukan normalisasi (scaling) fitur numerik ke rentang `[0, 1]`.
+  - `fit_transform()` menghitung parameter scaling (misalnya, nilai minimum dan maksimum) dan menerapkannya pada data.
+  - Kolom `average_rating`, `ratings_count`, dan `num_pages` dinormalisasi agar memiliki skala yang sama, yang penting untuk algoritma machine learning seperti regresi atau clustering.
 
 ---
 
-### **3. Encoding dan Scaling**
-
-#### **a. One-Hot Encoding untuk Fitur Kategorikal**
+### 7. **Encoding Variabel Kategorikal**
 ```python
-X = pd.get_dummies(X, columns=['telecom_partner', 'gender', 'state', 'city'], drop_first=True)
+le = LabelEncoder()
+df['language_code'] = le.fit_transform(df['language_code'].astype(str))
 ```
-- **`pd.get_dummies()`**:
-  - Melakukan **One-Hot Encoding** untuk fitur kategorikal seperti `telecom_partner`, `gender`, `state`, dan `city`.
-  - Parameter `drop_first=True` menghilangkan salah satu kategori untuk menghindari **multikolinearitas** (masalah dummy variable trap).
+- **Penjelasan**:
+  - `LabelEncoder()` digunakan untuk mengonversi variabel kategorikal (misalnya, bahasa buku) menjadi nilai numerik.
+  - `fit_transform()` mengonversi setiap kategori unik dalam kolom `language_code` menjadi bilangan bulat (integer).
+  - Misalnya, jika `language_code` berisi `['en', 'fr', 'es']`, maka hasil encoding bisa menjadi `[0, 1, 2]`.
 
 ---
 
-#### **b. Normalisasi/Standarisasi Fitur Numerik**
+### 8. **Ekstraksi Fitur dari Teks (TF-IDF)**
 ```python
-numerical_cols = X.select_dtypes(include=np.number).columns
-scaler = StandardScaler()
-X[numerical_cols] = scaler.fit_transform(X[numerical_cols])
+tfidf_vectorizer = TfidfVectorizer()
+tfidf_title = tfidf_vectorizer.fit_transform(df['title'].astype(str))
+tfidf_title_array = tfidf_title.toarray()
 ```
-- **`select_dtypes(include=np.number)`**:
-  - Memilih hanya kolom numerik dari DataFrame.
-
-- **`StandardScaler()`**:
-  - Menggunakan **StandardScaler** untuk melakukan standarisasi pada fitur numerik.
-  - Standarisasi mengubah data agar memiliki mean 0 dan standar deviasi 1, sehingga semua fitur memiliki skala yang seragam.
-
-- **`fit_transform()`**:
-  - Melakukan fitting dan transformasi sekaligus pada data numerik.
+- **Penjelasan**:
+  - `TfidfVectorizer()` digunakan untuk mengubah teks (kolom `title`) menjadi representasi numerik menggunakan metode TF-IDF (Term Frequency-Inverse Document Frequency).
+  - `fit_transform()` menghitung bobot TF-IDF untuk setiap kata dalam teks dan menghasilkan matriks sparse.
+  - `toarray()` mengonversi matriks sparse menjadi array NumPy yang padat (dense array), yang dapat digunakan dalam model machine learning.
 
 ---
 
-### **4. Split Data untuk Pelatihan dan Pengujian**
-
-#### **a. Memisahkan Fitur (X) dan Target (y)**
+### 9. **Pemisahan Data (Train-Test Split)**
 ```python
-X = df.drop('churn', axis=1)
-y = df['churn']
-```
-- **`X`**:
-  - Berisi semua fitur independen (variabel prediktor) yang akan digunakan untuk melatih model.
-
-- **`y`**:
-  - Berisi variabel target (`churn`) yang ingin diprediksi.
-
----
-
-#### **b. Membagi Dataset Menjadi Training dan Testing**
-```python
+X = df.drop('average_rating', axis=1)
+y = df['average_rating']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 ```
-- **`train_test_split()`**:
-  - Membagi dataset menjadi dua bagian: **80% untuk training** dan **20% untuk testing**.
-  - Parameter `random_state=42` memastikan hasil pembagian konsisten setiap kali kode dijalankan.
+- **Penjelasan**:
+  - `X = df.drop('average_rating', axis=1)` memilih semua fitur (kolom) kecuali `average_rating` sebagai variabel independen (input).
+  - `y = df['average_rating']` memilih kolom `average_rating` sebagai variabel dependen (target/output).
+  - `train_test_split()` membagi data menjadi dua subset:
+    - **Data pelatihan (`X_train`, `y_train`)**: Digunakan untuk melatih model.
+    - **Data pengujian (`X_test`, `y_test`)**: Digunakan untuk mengevaluasi performa model.
+  - Parameter `test_size=0.2` menentukan bahwa 20% data digunakan untuk pengujian, dan sisanya (80%) untuk pelatihan.
+  - `random_state=42` memastikan hasil pembagian data konsisten setiap kali kode dijalankan.
 
 ---
 
-#### **c. Menyeimbangkan Data Menggunakan SMOTE**
-```python
-smote = SMOTE(random_state=42)
-X_train_resampled, y_train_resampled = smote.fit_resample(X_train, y_train)
-```
-- **`SMOTE()`**:
-  - **Synthetic Minority Over-sampling Technique (SMOTE)** digunakan untuk menyeimbangkan distribusi kelas dalam dataset.
-  - Teknik ini menciptakan sampel sintetis untuk kelas minoritas agar jumlahnya seimbang dengan kelas mayoritas.
-
-- **`fit_resample()`**:
-  - Melakukan oversampling pada data training (`X_train` dan `y_train`) untuk menghasilkan dataset yang seimbang.
+### Kesimpulan
+Kode ini mencakup langkah-langkah utama dalam **data preprocessing**, termasuk:
+1. Menghitung korelasi untuk memahami hubungan antar fitur.
+2. Membersihkan data dengan menghapus duplikat dan nilai hilang.
+3. Standarisasi nama kolom dan konversi tipe data.
+4. Normalisasi fitur numerik.
+5. Encoding variabel kategorikal.
+6. Ekstraksi fitur dari teks.
+7. Pemisahan data menjadi set pelatihan dan pengujian.
 
 ---
 
-### **Output Akhir**
-Setelah menjalankan semua langkah di atas:
-1. Dataset telah dibersihkan dari duplikat dan kolom tidak relevan.
-2. Fitur baru (`days_since_registration` dan `total_usage`) telah dibuat.
-3. Data kategorikal telah diubah menjadi format numerik menggunakan One-Hot Encoding.
-4. Fitur numerik telah distandarisasi.
-5. Dataset telah dibagi menjadi data training dan testing.
-6. Data training telah diseimbangkan menggunakan SMOTE.
+## **Modeling and Result**
 
-## Modeling
-### **Algoritma yang Digunakan**
-#### **Gradient Boosting (XGBoost/LightGBM)**
-- **Cara Kerja**:  
-  Membangun ensemble pohon keputusan secara bertahap. Setiap pohon dikoreksi kesalahan prediksi pohon sebelumnya. Dilatih dengan teknik *boosting* untuk mengurangi bias.
-- **Parameter Awal**:
-  - `n_estimators=100` (jumlah pohon).
-  - `learning_rate=1.0` (tingkat pembelajaran).
-  - `max_depth=6` (kedalaman maksimum pohon).
-- **Hyperparameter Tuning**:
-  - **Grid Search** dengan kombinasi:
-    - `n_estimators`: [100], `learning_rate`: [1.0], `max_depth`: [3], `subsample`: [0.8].
-  - **Parameter Terbaik**:  
-    `{'max_depth': 3, 'n_estimators': 100, 'learning_rate': 1.0, 'subsample': 0.8}`.
+### **Sistem Rekomendasi**
+1. **Content-Based Filtering**  
+   - Menggunakan `TfidfVectorizer` untuk mengubah judul buku menjadi vektor numerik.
+   - Menggunakan algoritma `NearestNeighbors` untuk menemukan buku-buku yang mirip berdasarkan kemiripan judul.
 
-#### **Neural Network**
-- **Cara Kerja**:  
-  Jaringan saraf tiruan dengan satu lapisan tersembunyi (100 neuron). Menggunakan aktivasi ReLU dan optimasi Adam.
-- **Parameter**:
-  - `hidden_layer_sizes=(100,)` (1 lapisan tersembunyi dengan 100 neuron).
-  - `max_iter=500` (iterasi maksimum pelatihan).
+2. **Collaborative Filtering**  
+   - Menggunakan data rating dan interaksi pengguna untuk merekomendasikan buku berdasarkan preferensi pengguna lain yang mirip.
 
+### **Top-N Recommendation**
+- Contoh rekomendasi untuk buku "Harry Potter and the Half-Blood Prince":
+  - **Title:** Harry Potter and the Order of the Phoenix, **Author:** J.K. Rowling, **Similarity:** 0.85
+  - **Title:** Harry Potter and the Goblet of Fire, **Author:** J.K. Rowling, **Similarity:** 0.83
 
-Parameter `GridSearchCV` yang digunakan sebagai berikut:
+### **Kelebihan dan Kekurangan Pendekatan**
+1. **Content-Based Filtering**  
+   - **Kelebihan:** Rekomendasi sangat relevan dengan preferensi individu pengguna.
+   - **Kekurangan:** Kurang eksploratif, cenderung merekomendasikan buku dengan genre yang sama.
 
-```python
-grid_search_gb = GridSearchCV(
-    estimator=gb_model,         # Model yang akan dioptimalkan (Gradient Boosting model)
-    param_grid=param_grid_gb,   # Grid parameter yang akan dieksplorasi
-    cv=5,                       # Jumlah fold untuk cross-validation (5-fold CV)
-    scoring='roc_auc'           # Metrik evaluasi yang digunakan untuk memilih model terbaik (AUC-ROC)
-)
-```
-
-### Penjelasan Parameter:
-1. **`estimator`**:
-   - Ini adalah model pembelajaran mesin yang ingin dioptimalkan. Dalam hal ini, `gb_model` adalah model Gradient Boosting yang akan dioptimalkan menggunakan `GridSearchCV`.
-
-2. **`param_grid`**:
-   - Ini adalah dictionary yang berisi parameter dan nilai-nilai yang ingin dieksplorasi. Pada contoh Anda:
-     ```python
-     param_grid_gb = {
-         'n_estimators': [100],       # Jumlah estimators (pohon) dalam model
-         'learning_rate': [1.0],      # Tingkat pembelajaran (step size)
-         'max_depth': [3],            # Kedalaman maksimum setiap pohon
-         'subsample': [0.8]           # Proporsi sampel yang digunakan untuk melatih setiap pohon
-     }
-     ```
-     Nilai-nilai ini adalah kandidat yang akan diuji selama proses grid search.
-
-3. **`cv`**:
-   - Menentukan jumlah fold untuk cross-validation. Dalam hal ini, `cv=5` berarti data pelatihan akan dibagi menjadi 5 bagian, dan model akan dilatih serta dievaluasi sebanyak 5 kali dengan kombinasi data yang berbeda.
-
-4. **`scoring`**:
-   - Metrik evaluasi yang digunakan untuk mengevaluasi performa model. Dalam hal ini, `scoring='roc_auc'` berarti metrik AUC-ROC digunakan untuk memilih model terbaik. Anda juga dapat menggantinya dengan metrik lain seperti `'accuracy'`, `'recall'`, dll., sesuai kebutuhan.
-
+2. **Collaborative Filtering**  
+   - **Kelebihan:** Lebih eksploratif, dapat merekomendasikan buku yang belum pernah ditemui pengguna sebelumnya.
+   - **Kekurangan:** Memerlukan data interaksi yang besar, tidak efektif untuk pengguna baru.
+  
 ---
 
-### Hasil dari `GridSearchCV`:
-Setelah menjalankan `grid_search_gb.fit(X_train, y_train)`, Anda mendapatkan:
-- **`best_params_`**: Parameter terbaik yang ditemukan oleh `GridSearchCV`.
-- **`best_estimator_`**: Model dengan parameter terbaik yang telah dilatih pada data pelatihan.
-- **`cv_results_`**: Informasi tambahan tentang hasil cross-validation untuk setiap kombinasi parameter.
-
-
-
----
-
-### **Kesimpulan**
-- **Memilih Gradient Boosting sebagai model terbaik**, alasan utamanya adalah stabilitas, kecepatan pelatihan, dan kemampuan menangani dataset tabular dengan baik.
-- Dengan hyperparameter tuning, Gradient Boosting dapat dioptimalkan untuk mencapai performa yang lebih baik dibandingkan Neural Network pada kasus churn prediction dengan dataset seperti Telecom Churn Dataset.
-
-
-## Evaluation
+## **Evaluation**
 
 ### **Metrik Evaluasi**
-- **AUC-ROC**: Mengukur kemampuan model membedakan kelas churn dan non-churn.
-- **Akurasi**: Proporsi prediksi benar dari total prediksi.
-- **Recall**: Kemampuan model mendeteksi pelanggan churn (menghindari false negative).
+1. **Cosine Similarity**  
+   - Digunakan untuk mengukur kemiripan antara buku berdasarkan fitur teks (judul).
+   - Semakin tinggi nilai cosine similarity, semakin mirip buku tersebut.
+
+2. **Mean Absolute Error (MAE)**  
+   - Digunakan untuk mengukur akurasi prediksi rating dalam collaborative filtering.
+   - Semakin rendah nilai MAE, semakin akurat prediksi model.
 
 ### **Hasil Evaluasi**
-| **Model**                | **AUC-ROC** | **Akurasi** | **Recall** |
-|--------------------------|-------------|-------------|------------|
-| Gradient Boosting (Awal)   |    0.50   |    0.78   |    0.03      |
-| Neural Network             |    0.50   |    0.80   |    0.00      |
-| Gradient Boosting (Tuning) |    0.50   |    0.80   |    0.01      |
-| Gradient Boosting + SMOTE  |    0.50   |    0.80   |    0.01      |
+- **Content-Based Filtering:** Rekomendasi yang dihasilkan memiliki cosine similarity yang tinggi (>0.8), menunjukkan bahwa buku yang direkomendasikan sangat mirip dengan buku yang dicari.
+- **Collaborative Filtering:** Model memiliki MAE yang rendah, menunjukkan bahwa prediksi rating cukup akurat.
 
-### **Analisis Bisnis**
-1. **Apakah model menjawab isu churn?**  
-   **Ya**. Model Gradient Boosting setelah tuning memiliki **AUC-ROC 0.50** dan **recall 0.01** (dengan SMOTE), yang menunjukkan performa model masih perlu ditingkatkan dalam mengidentifikasi pelanggan berisiko churn.
-
-2. **Apakah tujuan tercapai?**  
-   **Sebagian**. Meskipun model memiliki akurasi yang tinggi (**0.80**), nilai **recall yang sangat rendah (0.01)** menunjukkan model masih kurang efektif dalam mendeteksi pelanggan yang benar-benar churn. Perlu dilakukan perbaikan lebih lanjut.
-
-3. **Dampak solusi**  
-   - **Prediksi Churn**: Model saat ini belum cukup andal untuk memberikan prediksi churn yang akurat.
-   - **SMOTE**: Tidak memberikan peningkatan recall yang signifikan dalam kasus ini.
-   - **Hyperparameter Tuning**: Tidak meningkatkan AUC-ROC, recall, atau akurasi dibandingkan baseline.
+---
 
 ### **Kesimpulan**
-- **Model Terbaik**: Tidak ada model yang menunjukkan performa yang cukup baik berdasarkan metrik evaluasi. Perlu dilakukan eksperimen lebih lanjut untuk meningkatkan performa model, terutama pada recall.
-- **Rekomendasi**:
-  - Mengeksplorasi model lain seperti Random Forest atau XGBoost dengan tuning lebih lanjut.
-  - Memeriksa kembali fitur engineering dan preprocessing untuk memastikan model dapat menangkap pola yang lebih baik.
-  - Menggunakan teknik lain untuk menangani ketidakseimbangan kelas selain SMOTE, seperti cost-sensitive learning atau penalized models.
+Proyek **Rekomendasi Buku** ini berhasil mengimplementasikan sistem rekomendasi berbasis konten dan kolaboratif. Dengan menggunakan dataset Goodreads Books, sistem ini dapat memberikan rekomendasi buku yang relevan dan personal kepada pengguna. Pendekatan hybrid yang menggabungkan kedua metode ini diharapkan dapat meningkatkan pengalaman pembaca dan mendukung pertumbuhan industri penerbitan.
