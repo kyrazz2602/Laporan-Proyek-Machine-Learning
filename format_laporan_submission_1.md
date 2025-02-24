@@ -310,79 +310,72 @@ Proses data preparation mencakup langkah-langkah penting seperti penanganan miss
 
 ## **Modeling dan Hasil**
 
-### **1. Penjelasan Algoritma SVD**
-Algoritma **Singular Value Decomposition (SVD)** digunakan dalam pendekatan **collaborative filtering** untuk mereduksi dimensi dari matriks interaksi pengguna dan item (seperti rating). Proses ini membagi matriks menjadi tiga komponen:
+### **1. Algoritma SVD (Singular Value Decomposition)**
+Algoritma **Singular Value Decomposition (SVD)** digunakan dalam pendekatan **Collaborative Filtering** untuk mereduksi dimensi dari matriks interaksi pengguna dan item (seperti rating). Proses ini membagi matriks menjadi tiga komponen utama:
 - **Matriks Pengguna (U):** Representasi preferensi pengguna.
-- **Matriks Singular Values (Σ):** Nilai singular yang menangkap hubungan antara pengguna dan item.
+- **Matriks Singular Values (Σ):** Menangkap hubungan antara pengguna dan item.
 - **Matriks Item (V):** Representasi karakteristik item.
 
-Dengan mengurangi dimensi, SVD dapat menangkap hubungan yang lebih kuat antara pengguna dan item, sehingga meningkatkan akurasi rekomendasi. Algoritma ini juga efektif dalam mengatasi masalah *sparsity* pada matriks interaksi pengguna-item.
+Dengan reduksi dimensi, SVD dapat menangkap hubungan yang lebih kuat antara pengguna dan item, meningkatkan akurasi rekomendasi, serta mengatasi masalah *sparsity* pada matriks interaksi pengguna-item.
 
 ---
 
-### **2. Hasil Rekomendasi**
+### **2. Content-Based Filtering**
+Pendekatan **Content-Based Filtering** digunakan untuk merekomendasikan buku berdasarkan kemiripan fitur, seperti judul dan deskripsi, dengan metode **Cosine Similarity** untuk menghitung tingkat kemiripan antar buku.
 
+#### **Hasil Rekomendasi untuk "Harry Potter and the Half-Blood Prince"**
+| No | Judul Buku | Penulis | Similarity Score |
+|----|--------------------------------------|--------------------------------|-----------------|
+| 1  | Harry Potter and the Half-Blood Prince (Harry Potter #6) | J.K. Rowling/Mary GrandPré | **1.00** |
+| 2  | Harry Potter Collection (Harry Potter #1-6) | J.K. Rowling | **0.78** |
+| 3  | Harry Potter and the Philosopher's Stone (Harry Potter #1) | J.K. Rowling | **0.72** |
+| 4  | Harry Potter and the Chamber of Secrets (Harry Potter #2) | J.K. Rowling | **0.72** |
+| 5  | Harry Potter and the Chamber of Secrets (Harry Potter #2) | J.K. Rowling/Mary GrandPré | **0.72** |
+
+---
+
+### **3. Collaborative Filtering (SVD)**
+Pendekatan **Collaborative Filtering** dengan algoritma **SVD** menganalisis pola interaksi pengguna dengan buku dan memprediksi rating untuk buku yang belum pernah mereka baca.
+
+#### **Evaluasi Model (RMSE)**
+- **Root Mean Squared Error (RMSE):** **0.0701**  
+  *(Semakin rendah RMSE, semakin akurat prediksi model)*
+
+#### **Top 5 Rekomendasi untuk User 1**
+| No | Book ID | Predicted Rating |
+|----|--------|-----------------|
+| 1  | 34909  | **0.786** |
+| 2  | 14243  | **0.786** |
+| 3  | 38296  | **0.786** |
+| 4  | 36438  | **0.786** |
+| 5  | 2319   | **0.786** |
+
+---
+
+### **4. Analisis Hasil**
 #### **Content-Based Filtering**
-Berikut adalah hasil rekomendasi menggunakan pendekatan **Content-Based Filtering** untuk buku **"Harry Potter and the Half-Blood Prince"**:
+**Kelebihan:**
+- Memberikan rekomendasi yang sangat relevan dengan preferensi pengguna.
+- Tidak bergantung pada data interaksi pengguna lain (*cocok untuk pengguna baru*).
 
-1. **Harry Potter and the Half-Blood Prince (Harry Potter #6)**  
-   Author: J.K. Rowling/Mary GrandPré  
-   Similarity Score: 1.00  
+**Kekurangan:**
+- Terbatas dalam eksplorasi, hanya merekomendasikan buku yang sangat mirip.
+- Tidak dapat menangkap preferensi pengguna secara luas.
 
-2. **Harry Potter Collection (Harry Potter #1-6)**  
-   Author: J.K. Rowling  
-   Similarity Score: 0.78  
+#### **Collaborative Filtering (SVD)**
+**Kelebihan:**
+- Lebih eksploratif, dapat merekomendasikan buku yang tidak selalu memiliki kemiripan langsung.
+- Mampu menangkap preferensi pengguna secara lebih luas.
 
-3. **Harry Potter and the Philosopher's Stone (Harry Potter #1)**  
-   Author: J.K. Rowling  
-   Similarity Score: 0.72  
-
-4. **Harry Potter and the Chamber of Secrets (Harry Potter #2)**  
-   Author: J.K. Rowling  
-   Similarity Score: 0.72  
-
-5. **Harry Potter and the Chamber of Secrets (Harry Potter #2)**  
-   Author: J.K. Rowling/Mary GrandPré  
-   Similarity Score: 0.72  
-
-#### **Collaborative Filtering**
-Berikut adalah hasil rekomendasi menggunakan pendekatan **Collaborative Filtering** berdasarkan data interaksi pengguna dan rating:
-
-| Peringkat | Judul Buku                                | Skor Rekomendasi |
-|-----------|------------------------------------------|------------------|
-| 1         | The Hunger Games                         | 4.5              |
-| 2         | Twilight                                 | 4.3              |
-| 3         | Mockingjay                               | 4.1              |
-| 4         | Catching Fire                            | 4.0              |
-| 5         | Divergent                                | 3.9              |
+**Kekurangan:**
+- Bergantung pada data interaksi pengguna (*kurang efektif untuk pengguna baru*).
 
 ---
 
-### **Kelebihan dan Kekurangan Pendekatan**
-
-#### **Content-Based Filtering**
-- **Kelebihan:**
-  - Rekomendasi sangat relevan dengan preferensi individu pengguna.
-  - Tidak memerlukan data interaksi pengguna lain, sehingga cocok untuk pengguna baru (*cold start problem*).
-- **Kekurangan:**
-  - Kurang eksploratif, cenderung merekomendasikan buku dengan genre atau tema yang sama.
-  - Tidak dapat menangkap preferensi pengguna secara holistik karena hanya berfokus pada atribut konten.
-
-#### **Collaborative Filtering**
-- **Kelebihan:**
-  - Lebih eksploratif, dapat merekomendasikan buku yang belum pernah ditemui pengguna sebelumnya.
-  - Mampu menangkap preferensi pengguna secara holistik melalui pola interaksi dengan pengguna lain.
-- **Kekurangan:**
-  - Memerlukan data interaksi yang besar untuk menghasilkan rekomendasi yang akurat.
-  - Tidak efektif untuk pengguna baru (*cold start problem*) karena kurangnya data interaksi.
-
----
-
-### **Kesimpulan**
-- **Content-Based Filtering** memberikan rekomendasi yang sangat relevan dengan preferensi individu pengguna tetapi kurang eksploratif.
-- **Collaborative Filtering** lebih eksploratif dan dapat merekomendasikan buku baru, namun memerlukan data interaksi yang besar.
-- Evaluasi model menggunakan RMSE menunjukkan bahwa algoritma SVD cukup akurat dalam memprediksi rating pengguna.
-- Hasil rekomendasi ditampilkan dalam format tabel untuk mempermudah interpretasi dan pengambilan keputusan.
+### **5. Kesimpulan**
+**Content-Based Filtering** memberikan rekomendasi yang sangat relevan tetapi kurang eksploratif.
+**Collaborative Filtering (SVD)** menghasilkan prediksi rating yang akurat dengan **RMSE 0.0697**.
+Kombinasi kedua pendekatan ini dapat meningkatkan kualitas rekomendasi dengan menggabungkan keunggulan masing-masing metode.
   
 ---
 
