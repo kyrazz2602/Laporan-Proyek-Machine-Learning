@@ -51,271 +51,391 @@ Proyek **Rekomendasi Buku** memiliki relevansi yang tinggi dalam mengatasi tanta
 
 ## **Business Understanding**
 
-#### **Problem Statements (Pernyataan Masalah)**
-Masalah utama yang dihadapi dalam konteks ini adalah kesulitan pembaca dalam menemukan buku yang sesuai dengan minat, kebutuhan, atau preferensi mereka di tengah ledakan jumlah pilihan buku yang tersedia. Dengan lebih dari 3 juta judul buku baru diterbitkan setiap tahun (Nielsen Book Research, 2021), pembaca sering kali mengalami *information overload*—sebuah kondisi di mana terlalu banyak informasi membuat pengambilan keputusan menjadi sulit dan membingungkan. Selain itu, platform digital seperti toko buku online sering kali tidak memberikan rekomendasi yang relevan atau personal bagi pengguna, sehingga pengalaman membaca menjadi kurang optimal.
+### **Problem Statements (Pernyataan Masalah)**  
+1. **Kesulitan Pembaca dalam Menemukan Buku yang Sesuai:**  
+   Pembaca sering kali mengalami kesulitan menemukan buku yang sesuai dengan minat, kebutuhan, atau preferensi mereka di tengah ledakan jumlah pilihan buku yang tersedia, menyebabkan pengalaman membaca yang kurang optimal.  
 
-Masalah ini juga berdampak pada industri penerbitan, karena kurangnya personalisasi dalam rekomendasi dapat mengurangi penjualan buku dan engagement pembaca. Oleh karena itu, diperlukan solusi yang dapat membantu pembaca menemukan buku yang tepat sambil mendukung pertumbuhan industri penerbitan melalui strategi pemasaran yang lebih efektif.
+2. **Beberapa Besar Informasi yang Membingungkan (*Information Overload*):**  
+   Dengan lebih dari 3 juta judul buku baru diterbitkan setiap tahun, pembaca sering menghadapi *information overload*, yang meningkatkan beban kognitif dan membuat pengambilan keputusan menjadi sulit.  
 
-#### **Goals (Tujuan)**
-Tujuan dari proyek ini adalah untuk mengembangkan sistem rekomendasi buku yang dapat:
-- Meningkatkan pengalaman pembaca dengan memberikan rekomendasi buku yang dipersonalisasi berdasarkan minat, preferensi, dan perilaku mereka.
-- Mengurangi beban kognitif pembaca akibat *information overload* dengan menyaring opsi buku yang tidak relevan.
-- Mendukung industri penerbitan dengan meningkatkan visibilitas buku-buku yang sesuai dengan tren minat pembaca.
-- Mendorong literasi dan minat membaca melalui akses yang lebih mudah ke bahan bacaan yang menarik.
+3. **Kurangnya Personalisasi dalam Rekomendasi Buku:**  
+   Platform digital seperti toko buku online sering kali gagal memberikan rekomendasi yang relevan dan dipersonalisasi, sehingga mengurangi engagement pembaca dan potensi penjualan industri penerbitan.  
 
-#### **Solution Approach (Pendekatan Solusi)**
-Untuk mencapai tujuan tersebut, dua pendekatan solusi yang dapat digunakan adalah **Content-Based Filtering** dan **Collaborative Filtering**. Kedua pendekatan ini memiliki kelebihan dan karakteristik yang berbeda, namun sama-sama bertujuan untuk memberikan rekomendasi yang relevan kepada pengguna.
+4. **Rendahnya Literasi dan Minat Membaca Akibat Akses yang Tidak Efektif:**  
+   Kurangnya akses mudah ke bahan bacaan yang menarik dapat menurunkan minat membaca masyarakat secara keseluruhan, yang pada akhirnya memengaruhi tingkat literasi dan pertumbuhan industri penerbitan.
 
-1. **Content-Based Filtering**  
-   Pendekatan ini menggunakan informasi tentang konten (buku) untuk merekomendasikan item yang mirip dengan yang sudah disukai atau dibeli oleh pengguna. Informasi konten dapat mencakup deskripsi buku, genre, penulis, ulasan, rating, atau kata-kata kunci tertentu dalam teks buku.
+### **Goals (Tujuan)**  
+Tujuan dari proyek ini adalah untuk mengembangkan sistem rekomendasi buku yang dapat:  
 
-2. **Collaborative Filtering**  
-   Pendekatan ini memanfaatkan data dari pengguna lain untuk memberikan rekomendasi berdasarkan preferensi dan perilaku pengguna yang mirip. Ada dua jenis collaborative filtering:
-   - **User-Based Filtering:** Merekomendasikan buku berdasarkan preferensi pengguna lain yang memiliki selera serupa.
-   - **Item-Based Filtering:** Merekomendasikan buku berdasarkan hubungan antara buku-buku yang sering dibeli atau dinilai bersama.
+1. **Memberikan Rekomendasi Buku yang Lebih Personal:**  
+   Meningkatkan pengalaman pembaca dengan menyediakan rekomendasi buku yang sesuai dengan minat, preferensi, dan kebiasaan membaca mereka.  
+
+2. **Mengurangi Kerumitan dalam Memilih Buku:**  
+   Membantu pembaca menemukan buku yang relevan dengan lebih mudah, sehingga mengurangi stres akibat banyaknya pilihan yang tersedia (*information overload*).  
+
+3. **Meningkatkan Kesuksesan Industri Penerbitan:**  
+   Membantu penulis dan penerbit meningkatkan penjualan dengan memastikan buku-buku yang direkomendasikan sesuai dengan tren dan minat pembaca saat ini.  
+
+4. **Mendorong Minat Membaca di Kalangan Masyarakat:**  
+   Menjadikan aktivitas membaca lebih menarik dan mudah diakses melalui rekomendasi bahan bacaan yang relevan dan inspiratif, sehingga berkontribusi pada peningkatan literasi secara keseluruhan.
+
+### **Solution Approach (Pendekatan Solusi)**  
+Untuk mencapai tujuan proyek, kami mengusulkan dua pendekatan utama: **Content-Based Filtering** dan **Collaborative Filtering**. Kedua metode ini memiliki karakteristik unik dan saling melengkapi untuk memberikan rekomendasi buku yang relevan dan personal bagi pengguna.
+
+---
+
+1. **Content-Based Filtering (Rekomendasi Berbasis Konten)**  
+   Pendekatan ini fokus pada informasi detail tentang buku itu sendiri untuk memberikan rekomendasi. Sistem akan menganalisis atribut seperti:  
+   - Genre atau kategori buku  
+   - Penulis  
+   - Deskripsi buku  
+   - Kata-kunci dalam teks atau ulasan  
+   - Rating yang diberikan oleh pembaca  
+
+   Dengan memahami preferensi pengguna terhadap buku-buku sebelumnya, sistem akan merekomendasikan buku baru yang serupa dengan apa yang sudah disukai atau dibeli oleh pengguna.  
+
+   **Keunggulan:**  
+   - Sangat efektif untuk pengguna baru yang belum memiliki banyak data interaksi.  
+   - Memberikan rekomendasi yang lebih transparan karena berdasarkan konten buku yang jelas.  
+
+---
+
+2. **Collaborative Filtering (Rekomendasi Berbasis Kolaborasi)**  
+   Pendekatan ini menggunakan pola perilaku pengguna lain untuk memberikan rekomendasi. Ada dua jenis utama:  
+
+   - **User-Based Filtering (Berdasarkan Pengguna):**  
+     Merekomendasikan buku dengan melihat preferensi pengguna lain yang memiliki selera serupa. Misalnya, jika dua orang sering membeli buku yang sama, sistem akan merekomendasikan buku dari satu pengguna kepada yang lain.  
+
+   - **Item-Based Filtering (Berdasarkan Buku):**  
+     Merekomendasikan buku berdasarkan hubungan antara buku-buku yang sering dibeli atau dinilai bersama. Contohnya, jika banyak pembaca membeli "Buku A" dan "Buku B" secara bersamaan, sistem akan merekomendasikan "Buku B" kepada pembaca yang hanya membeli "Buku A".  
+
+   **Keunggulan:**  
+   - Mampu menangkap preferensi pengguna yang lebih kompleks dan tidak langsung.  
+   - Cocok untuk pengguna yang sudah memiliki riwayat interaksi yang cukup di platform.  
+
+---
+
+**Gabungan Kedua Pendekatan:**  
+Untuk hasil yang optimal, kedua metode ini dapat digabungkan menjadi **Hybrid Filtering**, yaitu pendekatan yang mengombinasikan kekuatan Content-Based Filtering dan Collaborative Filtering. Dengan cara ini, sistem dapat memberikan rekomendasi yang lebih akurat, relevan, dan personal bagi setiap pengguna.  
+
+**Contoh Penerapan:**  
+- Jika seorang pengguna menyukai genre fiksi ilmiah, sistem akan menggunakan **Content-Based Filtering** untuk merekomendasikan buku dengan genre serupa.  
+- Di saat yang sama, sistem juga akan menggunakan **Collaborative Filtering** untuk merekomendasikan buku-buku yang disukai oleh pengguna lain dengan minat serupa.  
 
 ---
 
 ## **Data Understanding**
 
 ### **Informasi Umum**
-Dataset yang digunakan untuk proyek ini adalah **Goodreads Books Dataset**, sebuah dataset yang berisi informasi tentang buku dari platform Goodreads, salah satu komunitas pembaca terbesar di dunia. Dataset ini mencakup berbagai atribut yang relevan untuk membangun sistem rekomendasi buku, seperti judul, penulis, rating, jumlah halaman, dan ulasan pengguna.
+Dataset yang digunakan untuk proyek ini adalah **Goodreads Books Dataset**, sebuah dataset yang berisi informasi tentang buku dari platform Goodreads, salah satu komunitas pembaca terbesar di dunia. Dataset ini mencakup berbagai atribut yang relevan untuk membangun sistem rekomendasi buku.
+
+---
 
 ### **Tautan Sumber Data**
 Dataset dapat diunduh dari sumber berikut:
 - **Kaggle**: [Goodreads Books Dataset](https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks)
 
-### **Variabel atau Fitur**
-Berikut adalah deskripsi variabel atau fitur utama yang terdapat dalam dataset (setelah penyesuaian):
+---
+
+### **Jumlah Data**
+Dataset ini memiliki:
+- **Jumlah Baris (Entri):** 11123  
+- **Jumlah Kolom (Fitur):** 12  
+
+---
+
+### **Kondisi Data**
+Setelah dilakukan eksplorasi awal, kondisi dataset adalah sebagai berikut:
+1. **Missing Values:**  
+   - Beberapa fitur seperti `authors` dan `publication_date` mengandung nilai kosong atau hilang. Misalnya, ada beberapa entri yang tidak mencantumkan nama penulis atau tanggal publikasi.
+   - Fitur `isbn` dan `isbn13` juga memiliki beberapa nilai yang hilang, namun jumlahnya relatif kecil (<1% dari total data).
+2. **Duplikat:**  
+   - Tidak ditemukan duplikat pada dataset ini. Setiap buku memiliki ID unik (`bookID`) yang memastikan tidak ada entri ganda.
+3. **Outlier:**  
+   - Fitur seperti `num_pages` memiliki beberapa outlier, misalnya buku dengan jumlah halaman sangat sedikit (<50) atau sangat banyak (>1000). Namun, outlier ini mungkin valid karena mencerminkan jenis buku tertentu (misalnya, buku anak-anak atau ensiklopedia).
+
+---
+
+### **Uraian Seluruh Fitur pada Data**
+Berikut adalah deskripsi lengkap dari setiap fitur dalam dataset:
 
 | **Fitur**             | **Deskripsi**                                                                  |
-|------------------------|-----------------------------------------------------------------------------|
-| `bookID`              | ID unik untuk setiap buku dalam dataset.                                   |
-| `title`               | Judul buku.                                                                |
-| `authors`             | Nama penulis buku (bisa lebih dari satu).                                  |
-| `average_rating`      | Rating rata-rata buku berdasarkan ulasan pengguna (skala 0–5).             |
-| `isbn`                | Nomor ISBN (International Standard Book Number) untuk identifikasi buku.   |
-| `isbn13`              | Versi ISBN 13-digit untuk identifikasi buku.                              |
-| `language_code`       | Kode bahasa buku (contoh: "en" untuk bahasa Inggris).                      |
-| `num_pages`           | Jumlah halaman dalam buku.                                                |
-| `ratings_count`       | Jumlah total rating yang diberikan oleh pengguna.                         |
-| `text_reviews_count`  | Jumlah ulasan teks yang ditulis oleh pengguna.                             |
-| `publication_date`    | Tanggal publikasi buku.                                                    |
-| `publisher`           | Nama penerbit buku.                                                       |
+|------------------------|-------------------------------------------------------------------------------|
+| `bookID`              | ID unik untuk setiap buku dalam dataset.                                     |
+| `title`               | Judul buku.                                                                  |
+| `authors`             | Nama penulis buku (bisa lebih dari satu).                                    |
+| `average_rating`      | Rating rata-rata buku berdasarkan ulasan pengguna (skala 0–5).               |
+| `isbn`                | Nomor ISBN (International Standard Book Number) untuk identifikasi buku.     |
+| `isbn13`              | Versi ISBN 13-digit untuk identifikasi buku.                                |
+| `language_code`       | Kode bahasa buku (contoh: "en" untuk bahasa Inggris).                        |
+| `num_pages`           | Jumlah halaman dalam buku.                                                  |
+| `ratings_count`       | Jumlah total rating yang diberikan oleh pengguna.                           |
+| `text_reviews_count`  | Jumlah ulasan teks yang ditulis oleh pengguna.                               |
+| `publication_date`    | Tanggal publikasi buku (format: MM/DD/YYYY).                                |
+| `publisher`           | Nama penerbit buku.                                                         |
 
+---
 
 ### **Tahapan Analisis**
-1. **Eksplorasi Data Awal**  
-   - **Ukuran Dataset:** Dataset terdiri dari sekitar 10.000 entri buku dengan 12 fitur utama.
-   - **Distribusi Rating:** Mayoritas buku memiliki rating antara 3.5 hingga 4.5, dengan sedikit buku yang memiliki rating rendah (<3.0), menunjukkan preferensi pembaca terhadap buku-buku berkualitas.
-   - **Word Cloud untuk Penulis:** Penulis populer seperti J.K. Rowling, Stephen King, dan Agatha Christie mendominasi dataset.
-   - **Scatter Plot Antara Jumlah Halaman dan Rating:** Tidak ada korelasi yang signifikan antara jumlah halaman dan rating, namun buku dengan jumlah halaman sedang (200–500) cenderung lebih populer.
 
-2. **Analisis Korelasi**  
-   - `ratings_count` memiliki korelasi positif dengan `average_rating`, yang berarti buku dengan lebih banyak rating cenderung memiliki rating yang lebih tinggi.
-   - `num_pages` tidak memiliki korelasi signifikan dengan `average_rating`.
+#### **1. Eksplorasi Data Awal**
+Untuk memahami karakteristik dataset, dilakukan eksplorasi data awal sebagai berikut:
 
-3. **Pembersihan Data**  
-   - **Menangani Missing Values:** Beberapa entri memiliki nilai kosong untuk fitur seperti `authors` atau `publication_date`. Nilai-nilai ini diisi dengan metode imputasi atau dihapus jika tidak relevan.
-   - **Normalisasi Data:** Fitur seperti `average_rating` dan `num_pages` dinormalisasi untuk memastikan skala yang seragam dalam analisis.
+- **Distribusi Rating (`average_rating`):**  
+  - Mayoritas buku memiliki rating antara 3.5 hingga 4.5, dengan sedikit buku yang memiliki rating rendah (<3.0). Hal ini menunjukkan bahwa pembaca cenderung memberikan rating positif untuk buku-buku yang mereka sukai.
+  - Visualisasi menggunakan histogram menunjukkan distribusi yang condong ke kanan (positively skewed).
 
-4. **Teknik Preprocessing untuk Machine Learning**  
-   - **Content-Based Filtering:** Fitur teks seperti `title` dan `authors` diproses menggunakan *Natural Language Processing* (NLP) untuk mengekstraksi fitur penting.
-   - **Collaborative Filtering:** Data interaksi pengguna seperti `ratings_count` dan `average_rating` digunakan untuk membangun matriks interaksi pengguna-buku.
+- **Penulis Populer (`authors`):**  
+  - Penulis seperti J.K. Rowling, Stephen King, dan Agatha Christie mendominasi dataset. Word cloud dibuat untuk menampilkan penulis dengan frekuensi kemunculan tertinggi.
+
+- **Hubungan Antara Jumlah Halaman dan Rating (`num_pages` vs `average_rating`):**  
+  - Scatter plot menunjukkan bahwa tidak ada korelasi signifikan antara jumlah halaman dan rating. Namun, buku dengan jumlah halaman sedang (200–500) cenderung lebih populer.
+
+- **Bahasa Buku (`language_code`):**  
+  - Sebagian besar buku dalam dataset berbahasa Inggris ("en"), dengan beberapa buku dalam bahasa lain seperti Spanyol ("es") dan Prancis ("fr").
+
+#### **2. Analisis Korelasi**
+Analisis korelasi dilakukan untuk memahami hubungan antarfitur numerik:
+- **`ratings_count` vs `average_rating`:**  
+  - Terdapat korelasi positif moderat, yang berarti buku dengan lebih banyak rating cenderung memiliki rating yang lebih tinggi.
+- **`num_pages` vs `average_rating`:**  
+  - Tidak ada korelasi signifikan antara jumlah halaman dan rating rata-rata.
+
+#### **3. Visualisasi Data**
+Beberapa visualisasi penting yang dihasilkan meliputi:
+- **Histogram untuk Distribusi Rating:** Menunjukkan distribusi rating buku secara keseluruhan.
+- **Word Cloud untuk Penulis:** Menampilkan penulis yang paling sering muncul dalam dataset.
+- **Scatter Plot untuk Jumlah Halaman vs Rating:** Mengidentifikasi pola antara jumlah halaman dan popularitas buku.
+- **Bar Chart untuk Bahasa Buku:** Menunjukkan proporsi buku berdasarkan bahasa.
+
+---
+
+### **Kesimpulan Awal**
+Dataset ini cukup kaya dengan informasi yang relevan untuk membangun sistem rekomendasi buku. Namun, perlu dilakukan pembersihan data untuk menangani missing values dan outlier agar hasil analisis lebih akurat. Visualisasi data membantu memahami tren dan pola dalam dataset, seperti preferensi pembaca terhadap buku dengan jumlah halaman sedang dan rating yang tinggi.
 
 ---
 
 ## **Data Preparation**
 
 ### **Teknik Data Preparation yang Dilakukan**
+Untuk memastikan dataset siap digunakan dalam pemodelan, dilakukan beberapa tahapan data preparation sebagai berikut:
+
 1. **Penanganan Missing Values**  
-   - Menghapus baris dengan nilai yang hilang pada kolom penting seperti `title`, `authors`, `average_rating`, `ratings_count`, dan `num_pages`.
-   
+   - Menghapus baris dengan nilai yang hilang pada kolom penting seperti `title`, `authors`, `average_rating`, `ratings_count`, dan `num_pages`. Hal ini dilakukan untuk memastikan bahwa hanya data yang lengkap yang digunakan dalam analisis.
+
 2. **Normalisasi Data**  
-   - Menggunakan `MinMaxScaler` untuk menormalisasi fitur numerik seperti `average_rating`, `ratings_count`, dan `num_pages`.
+   - Menggunakan `MinMaxScaler` untuk menormalisasi fitur numerik seperti `average_rating`, `ratings_count`, dan `num_pages`. Normalisasi memastikan semua fitur memiliki skala yang seragam, sehingga tidak ada fitur yang mendominasi model akibat perbedaan rentang nilai.
 
 3. **Encoding Kategori**  
-   - Menggunakan `LabelEncoder` untuk mengubah fitur kategorikal seperti `language_code` menjadi bentuk numerik.
+   - Menggunakan `LabelEncoder` untuk mengubah fitur kategorikal seperti `language_code` menjadi bentuk numerik. Encoding diperlukan agar algoritma machine learning dapat memproses data kategorikal.
 
 4. **TF-IDF untuk Fitur Teks**  
-   - Menggunakan `TfidfVectorizer` untuk mengubah fitur teks seperti `title` menjadi vektor numerik yang dapat digunakan dalam model machine learning.
+   - Menggunakan `TfidfVectorizer` untuk mengubah fitur teks seperti `title` menjadi vektor numerik. Teknik ini membantu mengekstraksi informasi penting dari teks dan mengubahnya menjadi format yang dapat digunakan oleh model.
+
+5. **Standarisasi Nama Kolom**  
+   - Membersihkan nama kolom dengan menghapus spasi, mengubahnya menjadi huruf kecil, dan mengganti spasi dengan garis bawah (`_`). Standarisasi ini memastikan konsistensi dalam penamaan kolom untuk mempermudah analisis.
+
+6. **Konversi Tipe Data (Tanggal)**  
+   - Mengonversi kolom `publication_date` menjadi tipe data `datetime` menggunakan `pd.to_datetime()`. Konversi ini memungkinkan manipulasi tanggal yang lebih mudah dalam analisis.
+
+7. **Pemisahan Data (Train-Test Split)**  
+   - Membagi dataset menjadi data pelatihan (80%) dan data pengujian (20%) menggunakan `train_test_split()`. Pembagian ini memastikan bahwa model dapat dievaluasi secara objektif pada data yang belum pernah dilihat sebelumnya.
+
+---
 
 ### **Alasan Tahapan Data Preparation**
-- **Penanganan Missing Values:** Untuk memastikan data yang digunakan dalam model bersih dan tidak mengandung nilai yang hilang yang dapat mempengaruhi hasil analisis.
-- **Normalisasi Data:** Untuk memastikan semua fitur numerik memiliki skala yang seragam, sehingga tidak ada fitur yang mendominasi model karena perbedaan skala.
-- **Encoding Kategori:** Untuk mengubah data kategorikal menjadi bentuk numerik yang dapat diproses oleh algoritma machine learning.
-- **TF-IDF:** Untuk mengekstraksi fitur penting dari teks dan mengubahnya menjadi bentuk yang dapat digunakan oleh model.
+Setiap langkah dalam data preparation memiliki tujuan spesifik untuk memastikan kualitas data dan hasil analisis:
+- **Penanganan Missing Values:** Untuk menghindari bias atau kesalahan dalam model akibat data yang tidak lengkap.
+- **Normalisasi Data:** Untuk memastikan semua fitur numerik memiliki skala yang sama, sehingga model tidak dipengaruhi oleh perbedaan rentang nilai.
+- **Encoding Kategori:** Untuk mengubah data kategorikal menjadi format numerik yang dapat diproses oleh algoritma machine learning.
+- **TF-IDF:** Untuk mengekstraksi fitur penting dari teks dan mengubahnya menjadi representasi numerik yang relevan.
+- **Standarisasi Nama Kolom:** Untuk memastikan konsistensi dalam penamaan kolom, yang mempermudah proses analisis dan pemodelan.
+- **Konversi Tipe Data:** Untuk memastikan bahwa setiap kolom memiliki tipe data yang sesuai dengan kebutuhan analisis.
+- **Pemisahan Data:** Untuk memastikan bahwa model dapat dievaluasi secara objektif pada data yang belum pernah digunakan selama pelatihan.
 
 ---
 
-### 1. **Menghitung Matriks Korelasi**
-```python
-correlation_matrix = df[['average_rating', 'ratings_count', '  num_pages']].corr()
-```
-- **Penjelasan**:
-  - Fungsi `.corr()` digunakan untuk menghitung korelasi antara kolom numerik dalam DataFrame.
-  - Di sini, kita menghitung korelasi antara tiga fitur: `average_rating`, `ratings_count`, dan `num_pages`.
-  - Hasilnya adalah matriks korelasi (berupa DataFrame) yang menunjukkan hubungan linier antar fitur. Nilai berkisar antara -1 hingga 1:
-    - `1`: Korelasi positif sempurna.
-    - `-1`: Korelasi negatif sempurna.
-    - `0`: Tidak ada korelasi.
-
----
-
-### 2. **Menghapus Duplikat**
+#### 1. **Menghapus Duplikat**
 ```python
 print("Number of duplicate rows:", df.duplicated().sum())
 df.drop_duplicates(inplace=True)
 ```
-- **Penjelasan**:
-  - `df.duplicated().sum()` menghitung jumlah baris duplikat dalam DataFrame.
-  - `df.drop_duplicates(inplace=True)` menghapus semua baris duplikat dari DataFrame. Parameter `inplace=True` memastikan perubahan langsung diterapkan ke DataFrame tanpa perlu membuat salinan baru.
+- **Penjelasan:** Menghapus baris duplikat untuk memastikan bahwa setiap entri dalam dataset unik.
 
----
-
-### 3. **Menangani Nilai Hilang (Missing Values)**
+#### 2. **Menangani Nilai Hilang**
 ```python
-df.dropna(subset=['title', 'authors', 'average_rating', 'ratings_count', '  num_pages'], inplace=True)
+df.dropna(subset=['title', 'authors', 'average_rating', 'ratings_count', 'num_pages'], inplace=True)
 missing_values_after_drop = df.isnull().sum()
 print("Missing Values After Dropping:\n", missing_values_after_drop)
 ```
-- **Penjelasan**:
-  - `df.dropna(subset=[...])` menghapus baris yang memiliki nilai hilang (`NaN`) pada kolom-kolom tertentu (`title`, `authors`, `average_rating`, `ratings_count`, `num_pages`).
-  - `df.isnull().sum()` menghitung jumlah nilai hilang di setiap kolom setelah penghapusan baris dengan nilai hilang.
-  - Ini memastikan bahwa hanya baris dengan data lengkap pada kolom-kolom penting yang tetap ada.
+- **Penjelasan:** Menghapus baris dengan nilai hilang pada kolom penting untuk memastikan data yang digunakan lengkap.
 
----
-
-### 4. **Standarisasi Nama Kolom**
-```python
-df.columns = df.columns.str.strip().str.lower().str.replace(" ", "_")
-```
-- **Penjelasan**:
-  - `df.columns.str.strip()` menghapus spasi di awal dan akhir nama kolom.
-  - `.str.lower()` mengubah semua nama kolom menjadi huruf kecil.
-  - `.str.replace(" ", "_")` mengganti spasi dengan garis bawah (`_`).
-  - Standarisasi ini memastikan bahwa nama kolom konsisten dan mudah digunakan dalam analisis atau pemodelan.
-
----
-
-### 5. **Konversi Tipe Data (Tanggal)**
-```python
-df['publication_date'] = pd.to_datetime(df['publication_date'], format='%m/%d/%Y', errors='coerce')
-```
-- **Penjelasan**:
-  - `pd.to_datetime()` mengonversi kolom `publication_date` menjadi tipe data `datetime`.
-  - Parameter `format='%m/%d/%Y'` menentukan format tanggal yang diharapkan (bulan/hari/tahun).
-  - Parameter `errors='coerce'` memastikan bahwa jika ada nilai yang tidak dapat dikonversi, nilai tersebut akan diubah menjadi `NaT` (Not a Time).
-
----
-
-### 6. **Normalisasi Fitur Numerik**
+#### 3. **Normalisasi Fitur Numerik**
 ```python
 scaler = MinMaxScaler()
 numerical_features = ['average_rating', 'ratings_count', 'num_pages']
 df[numerical_features] = scaler.fit_transform(df[numerical_features])
 ```
-- **Penjelasan**:
-  - `MinMaxScaler()` adalah alat untuk melakukan normalisasi (scaling) fitur numerik ke rentang `[0, 1]`.
-  - `fit_transform()` menghitung parameter scaling (misalnya, nilai minimum dan maksimum) dan menerapkannya pada data.
-  - Kolom `average_rating`, `ratings_count`, dan `num_pages` dinormalisasi agar memiliki skala yang sama, yang penting untuk algoritma machine learning seperti regresi atau clustering.
+- **Penjelasan:** Menormalisasi fitur numerik ke rentang `[0, 1]` untuk memastikan skala yang seragam.
 
----
-
-### 7. **Encoding Variabel Kategorikal**
+#### 4. **Encoding Variabel Kategorikal**
 ```python
 le = LabelEncoder()
 df['language_code'] = le.fit_transform(df['language_code'].astype(str))
 ```
-- **Penjelasan**:
-  - `LabelEncoder()` digunakan untuk mengonversi variabel kategorikal (misalnya, bahasa buku) menjadi nilai numerik.
-  - `fit_transform()` mengonversi setiap kategori unik dalam kolom `language_code` menjadi bilangan bulat (integer).
-  - Misalnya, jika `language_code` berisi `['en', 'fr', 'es']`, maka hasil encoding bisa menjadi `[0, 1, 2]`.
+- **Penjelasan:** Mengonversi variabel kategorikal seperti `language_code` menjadi nilai numerik.
 
----
-
-### 8. **Ekstraksi Fitur dari Teks (TF-IDF)**
+#### 5. **Ekstraksi Fitur dari Teks**
 ```python
 tfidf_vectorizer = TfidfVectorizer()
 tfidf_title = tfidf_vectorizer.fit_transform(df['title'].astype(str))
 tfidf_title_array = tfidf_title.toarray()
 ```
-- **Penjelasan**:
-  - `TfidfVectorizer()` digunakan untuk mengubah teks (kolom `title`) menjadi representasi numerik menggunakan metode TF-IDF (Term Frequency-Inverse Document Frequency).
-  - `fit_transform()` menghitung bobot TF-IDF untuk setiap kata dalam teks dan menghasilkan matriks sparse.
-  - `toarray()` mengonversi matriks sparse menjadi array NumPy yang padat (dense array), yang dapat digunakan dalam model machine learning.
+- **Penjelasan:** Mengubah teks dalam kolom `title` menjadi representasi numerik menggunakan TF-IDF.
 
----
-
-### 9. **Pemisahan Data (Train-Test Split)**
+#### 6. **Pemisahan Data**
 ```python
 X = df.drop('average_rating', axis=1)
 y = df['average_rating']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 ```
-- **Penjelasan**:
-  - `X = df.drop('average_rating', axis=1)` memilih semua fitur (kolom) kecuali `average_rating` sebagai variabel independen (input).
-  - `y = df['average_rating']` memilih kolom `average_rating` sebagai variabel dependen (target/output).
-  - `train_test_split()` membagi data menjadi dua subset:
-    - **Data pelatihan (`X_train`, `y_train`)**: Digunakan untuk melatih model.
-    - **Data pengujian (`X_test`, `y_test`)**: Digunakan untuk mengevaluasi performa model.
-  - Parameter `test_size=0.2` menentukan bahwa 20% data digunakan untuk pengujian, dan sisanya (80%) untuk pelatihan.
-  - `random_state=42` memastikan hasil pembagian data konsisten setiap kali kode dijalankan.
+- **Penjelasan:** Membagi dataset menjadi data pelatihan dan pengujian untuk evaluasi model.
 
 ---
 
-### Kesimpulan
-Kode ini mencakup langkah-langkah utama dalam **data preprocessing**, termasuk:
-1. Menghitung korelasi untuk memahami hubungan antar fitur.
-2. Membersihkan data dengan menghapus duplikat dan nilai hilang.
-3. Standarisasi nama kolom dan konversi tipe data.
-4. Normalisasi fitur numerik.
-5. Encoding variabel kategorikal.
-6. Ekstraksi fitur dari teks.
-7. Pemisahan data menjadi set pelatihan dan pengujian.
+### **Kesimpulan**
+Proses data preparation mencakup langkah-langkah penting seperti penanganan missing values, normalisasi, encoding, ekstraksi fitur teks, dan pemisahan data. Setiap langkah dirancang untuk memastikan bahwa dataset siap digunakan dalam pemodelan dan menghasilkan hasil yang akurat serta andal. Langkah-langkah ini juga membantu meningkatkan performa model dengan menghilangkan noise dan memastikan konsistensi dalam data.
 
 ---
 
-## **Modeling and Result**
+## **Modeling dan Hasil**
 
-### **Sistem Rekomendasi**
-1. **Content-Based Filtering**  
-   - Menggunakan `TfidfVectorizer` untuk mengubah judul buku menjadi vektor numerik.
-   - Menggunakan algoritma `NearestNeighbors` untuk menemukan buku-buku yang mirip berdasarkan kemiripan judul.
+### **1. Penjelasan Algoritma SVD**
+Algoritma **Singular Value Decomposition (SVD)** digunakan dalam pendekatan **collaborative filtering** untuk mereduksi dimensi dari matriks interaksi pengguna dan item (seperti rating). Proses ini membagi matriks menjadi tiga komponen:
+- **Matriks Pengguna (U):** Representasi preferensi pengguna.
+- **Matriks Singular Values (Σ):** Nilai singular yang menangkap hubungan antara pengguna dan item.
+- **Matriks Item (V):** Representasi karakteristik item.
 
-2. **Collaborative Filtering**  
-   - Menggunakan data rating dan interaksi pengguna untuk merekomendasikan buku berdasarkan preferensi pengguna lain yang mirip.
+Dengan mengurangi dimensi, SVD dapat menangkap hubungan yang lebih kuat antara pengguna dan item, sehingga meningkatkan akurasi rekomendasi. Algoritma ini juga efektif dalam mengatasi masalah *sparsity* pada matriks interaksi pengguna-item.
 
-### **Top-N Recommendation**
-- Contoh rekomendasi untuk buku "Harry Potter and the Half-Blood Prince":
-  - **Title:** Harry Potter and the Order of the Phoenix, **Author:** J.K. Rowling, **Similarity:** 0.85
-  - **Title:** Harry Potter and the Goblet of Fire, **Author:** J.K. Rowling, **Similarity:** 0.83
+---
+
+### **2. Hasil Rekomendasi**
+
+#### **Content-Based Filtering**
+Berikut adalah hasil rekomendasi menggunakan pendekatan **Content-Based Filtering** untuk buku **"Harry Potter and the Half-Blood Prince"**:
+
+1. **Harry Potter and the Half-Blood Prince (Harry Potter #6)**  
+   Author: J.K. Rowling/Mary GrandPré  
+   Similarity Score: 1.00  
+
+2. **Harry Potter Collection (Harry Potter #1-6)**  
+   Author: J.K. Rowling  
+   Similarity Score: 0.78  
+
+3. **Harry Potter and the Philosopher's Stone (Harry Potter #1)**  
+   Author: J.K. Rowling  
+   Similarity Score: 0.72  
+
+4. **Harry Potter and the Chamber of Secrets (Harry Potter #2)**  
+   Author: J.K. Rowling  
+   Similarity Score: 0.72  
+
+5. **Harry Potter and the Chamber of Secrets (Harry Potter #2)**  
+   Author: J.K. Rowling/Mary GrandPré  
+   Similarity Score: 0.72  
+
+#### **Collaborative Filtering**
+Berikut adalah hasil rekomendasi menggunakan pendekatan **Collaborative Filtering** berdasarkan data interaksi pengguna dan rating:
+
+| Peringkat | Judul Buku                                | Skor Rekomendasi |
+|-----------|------------------------------------------|------------------|
+| 1         | The Hunger Games                         | 4.5              |
+| 2         | Twilight                                 | 4.3              |
+| 3         | Mockingjay                               | 4.1              |
+| 4         | Catching Fire                            | 4.0              |
+| 5         | Divergent                                | 3.9              |
+
+---
 
 ### **Kelebihan dan Kekurangan Pendekatan**
-1. **Content-Based Filtering**  
-   - **Kelebihan:** Rekomendasi sangat relevan dengan preferensi individu pengguna.
-   - **Kekurangan:** Kurang eksploratif, cenderung merekomendasikan buku dengan genre yang sama.
 
-2. **Collaborative Filtering**  
-   - **Kelebihan:** Lebih eksploratif, dapat merekomendasikan buku yang belum pernah ditemui pengguna sebelumnya.
-   - **Kekurangan:** Memerlukan data interaksi yang besar, tidak efektif untuk pengguna baru.
+#### **Content-Based Filtering**
+- **Kelebihan:**
+  - Rekomendasi sangat relevan dengan preferensi individu pengguna.
+  - Tidak memerlukan data interaksi pengguna lain, sehingga cocok untuk pengguna baru (*cold start problem*).
+- **Kekurangan:**
+  - Kurang eksploratif, cenderung merekomendasikan buku dengan genre atau tema yang sama.
+  - Tidak dapat menangkap preferensi pengguna secara holistik karena hanya berfokus pada atribut konten.
+
+#### **Collaborative Filtering**
+- **Kelebihan:**
+  - Lebih eksploratif, dapat merekomendasikan buku yang belum pernah ditemui pengguna sebelumnya.
+  - Mampu menangkap preferensi pengguna secara holistik melalui pola interaksi dengan pengguna lain.
+- **Kekurangan:**
+  - Memerlukan data interaksi yang besar untuk menghasilkan rekomendasi yang akurat.
+  - Tidak efektif untuk pengguna baru (*cold start problem*) karena kurangnya data interaksi.
+
+---
+
+### **Kesimpulan**
+- **Content-Based Filtering** memberikan rekomendasi yang sangat relevan dengan preferensi individu pengguna tetapi kurang eksploratif.
+- **Collaborative Filtering** lebih eksploratif dan dapat merekomendasikan buku baru, namun memerlukan data interaksi yang besar.
+- Evaluasi model menggunakan RMSE menunjukkan bahwa algoritma SVD cukup akurat dalam memprediksi rating pengguna.
+- Hasil rekomendasi ditampilkan dalam format tabel untuk mempermudah interpretasi dan pengambilan keputusan.
   
 ---
 
 ## **Evaluation**
 
 ### **Metrik Evaluasi**
-1. **Cosine Similarity**  
-   - Digunakan untuk mengukur kemiripan antara buku berdasarkan fitur teks (judul).
-   - Semakin tinggi nilai cosine similarity, semakin mirip buku tersebut.
-
-2. **Mean Absolute Error (MAE)**  
-   - Digunakan untuk mengukur akurasi prediksi rating dalam collaborative filtering.
+1. **Mean Absolute Error (MAE) (Collaborative Filtering)**  
+   - Digunakan untuk mengukur akurasi prediksi rating dalam collaborative filtering.  
    - Semakin rendah nilai MAE, semakin akurat prediksi model.
 
+2. **Precision@K dan Recall@K (Content-Based Filtering)**  
+   - **Precision@K:** Mengukur proporsi rekomendasi yang relevan di antara top-K rekomendasi.  
+   - **Recall@K:** Mengukur seberapa baik sistem merekomendasikan semua item relevan yang ada di dataset.  
+
+---
+
 ### **Hasil Evaluasi**
-- **Content-Based Filtering:** Rekomendasi yang dihasilkan memiliki cosine similarity yang tinggi (>0.8), menunjukkan bahwa buku yang direkomendasikan sangat mirip dengan buku yang dicari.
-- **Collaborative Filtering:** Model memiliki MAE yang rendah, menunjukkan bahwa prediksi rating cukup akurat.
+
+#### **Collaborative Filtering**
+Untuk mengevaluasi pendekatan **Collaborative Filtering**, kami menggunakan metrik **Mean Absolute Error (MAE)**:
+
+```plaintext
+MAE: 0.0468
+Mean Absolute Error (MAE): 0.04678655599895617
+```
+
+- **Interpretasi:**  
+  - Nilai **MAE = 0.0468**, yang menunjukkan bahwa prediksi rating sangat akurat dengan selisih rata-rata yang kecil dari rating aktual.
+
+#### **Content-Based Filtering**
+Untuk mengevaluasi pendekatan **Content-Based Filtering**, kami menggunakan metrik **Precision@K** dan **Recall@K**:
+
+```plaintext
+Precision@5: 0.6
+Recall@5: 0.6
+```
+
+- **Interpretasi:**  
+  - **Precision@5 = 0.6** berarti 60% dari top-5 rekomendasi yang diberikan relevan dengan preferensi pengguna.  
+  - **Recall@5 = 0.6** berarti sistem berhasil merekomendasikan 60% dari semua item relevan yang tersedia dalam dataset.
+
+---
+
+### **Kesimpulan**
+Proyek **Rekomendasi Buku** ini berhasil mengimplementasikan sistem rekomendasi berbasis konten dan kolaboratif dengan hasil evaluasi sebagai berikut:
+
+| **Pendekatan**          | **Metrik**            | **Hasil**       | **Interpretasi**                                                                 |
+|--------------------------|-----------------------|-----------------|----------------------------------------------------------------------------------|
+| **Collaborative**        | MAE                  | 0.0468          | Prediksi rating sangat akurat dengan selisih rata-rata kecil.                   |
+| **Content-Based**        | Precision@5          | 0.6             | 60% dari top-5 rekomendasi relevan dengan preferensi pengguna.                   |
+|                          | Recall@5             | 0.6             | 60% dari semua item relevan berhasil direkomendasikan.                          |
+
+Pendekatan ini menunjukkan bahwa sistem rekomendasi bekerja dengan baik dalam memberikan rekomendasi yang akurat dan relevan bagi pengguna.
 
 ---
 
